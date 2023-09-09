@@ -6,11 +6,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/ffc69ba219.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <header>
+      <%= render "layouts/shared/header" %>
+      <%= render "layouts/shared/flash_message" %>
+    </header>
     <%= yield %>
   </body>
 </html>

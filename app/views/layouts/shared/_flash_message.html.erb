@@ -1,0 +1,8 @@
+<div class="flash-message hidden">
+  <% if flash[:notice].present? %>
+    <p class="notice"><%= notice %><span class="fa-solid fa-xmark"></span></p>
+  <% end %>
+  <% if flash[:alert].present? %>
+    <p class="alert"><%= alert %><span class="fa-solid fa-xmark"></span></p>
+  <% end %>
+</div>
