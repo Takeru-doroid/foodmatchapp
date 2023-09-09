@@ -10,10 +10,14 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,128}\z/i
   validates :name, presence: true
   validates :email, presence: true, if: -> { errors_blank?(:email) }
-  validates :email, format: {with: VALID_EMAIL_REGEX}, if: -> { errors_blank?(:email) }
+  validates :email, format: { with: VALID_EMAIL_REGEX }, if: -> { errors_blank?(:email) }
   validates :password, presence: true, on: :create, if: -> { errors_blank?(:password) }
-  validates :password, format: {with: VALID_PASSWORD_REGEX,
-                                message: "は半角英字・半角数字をそれぞれ1文字以上含む必要があります"}, allow_blank: true, if: -> { errors_blank?(:password) }
+  validates :password, format: {
+    with: VALID_PASSWORD_REGEX,
+    message: "は半角英字・半角数字をそれぞれ1文字以上含む必要があります",
+  }, allow_blank: true, if: -> {
+                              errors_blank?(:password)
+                            }
 
   def errors_blank?(attribute)
     errors[attribute].blank?
