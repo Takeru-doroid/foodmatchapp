@@ -1,0 +1,31 @@
+<div class="px-3 py-2 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <%= link_to root_path, class: "d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none" do %>
+      <dir style="height: 34px">
+        <span class="bi me-2">
+          <i class="fa-solid fa-house fa-2xl"></i>
+        </span>
+      </dir>
+    <% end %>
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <li>
+            <%= link_to user_path(current_user), class: "nav-link" do %>
+              <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar.variant(resize_to_limit: [50, 50]), class: "rounded-circle", alt: "ユーザーのアバター画像" if current_user.avatar.present? %>
+              <% else%>
+                <%= image_tag "default_image_user.jpg", size: "50x50", class: "rounded-circle", alt: "デフォルトのアバター画像" %>
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>
+<div class="px-3 py-2 border-bottom mb-3">
+  <div class="container d-flex flex-wrap justify-content-end">
+    <div class="nav">
+      <p><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %></p>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,10 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+//= require jquery3
+ //= require popper
+ //= require bootstrap-sprockets
+
 import "@hotwired/turbo-rails"
 import "controllers"
-
-console.log("JS使えてる〜?");
 
 document.addEventListener("click", ({target}) => {
   if (target.matches("#toggle-password-icon")) {
@@ -25,5 +27,12 @@ document.addEventListener("click", ({target}) => {
       target.classList.toggle("fa-eye", flg_3);
       target.classList.toggle("fa-eye-slash", !flg_3);
     }
+  }
+  if (target.matches(".close")) {
+    const alertMsg = document.getElementById("flash-message");
+    alertMsg.classList.add("fade-out");
+    alertMsg.addEventListener("animationend", () => {
+      alertMsg.remove();
+    });
   }
 });
