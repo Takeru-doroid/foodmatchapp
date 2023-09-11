@@ -1,0 +1,15 @@
+<div class="form-signin border rounded">
+  <h4 class="mb-5">パスワードを忘れましたか？</h4>
+  <%= form_with model: @user, url: user_password_path, method: :post, id: "new_user", class: "new_user", local: true do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="form-floating mb-5">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "example@example.com" %>
+      <%= f.label :email %>
+    </div>
+    <div class="col-10 mx-auto">
+      <div class="actions">
+        <%= f.submit "パスワードの再設定方法を送信する", class: "btn btn-outline-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,12 @@
+<% if flash[:notice].present? %>
+  <div class="container p-4 alert alert-success fade-in" id="flash-message">
+    <%= notice %>
+    <span class="close fa-solid fa-xmark fa-xl" style="cursor: pointer;"></span>
+  </div>
+<% end %>
+<% if flash[:alert].present? %>
+  <div class="container alert alert-warning fade-in" id="flash-message">
+    <%= alert %>
+    <span class="close fa-solid fa-xmark fa-xl" style="cursor: pointer;"></span>
+  </div>
+<% end %>

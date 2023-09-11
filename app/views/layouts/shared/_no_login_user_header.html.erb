@@ -1,0 +1,26 @@
+<div class="px-3 py-2 bg-dark">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <%= link_to root_path, class: "d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none" do %>
+        <dir style="height: 34px">
+          <span class="bi me-2">
+            <i class="fa-solid fa-house fa-2xl"></i>
+          </span>
+        </dir>
+      <% end %>
+      <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <li>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="px-3 py-2 border-bottom mb-3">
+  <div class="container d-flex flex-wrap justify-content-end">
+    <div class="nav">
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-primary me-2" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-secondary me-2" %>
+        <%= button_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-info" %>
+    </div>
+  </div>
+</div>
