@@ -1,2 +1,5 @@
 <h1>Homes#top</h1>
 <p>Find me in app/views/homes/top.html.erb</p>
+<% if user_signed_in? %>
+  <p><%= link_to "selectionsコントローラー(食材選び)", selections_display_selection_path %></p>
+<% end %>

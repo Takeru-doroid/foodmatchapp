@@ -1,0 +1,29 @@
+<div class="container">
+  <%= render "selections/shared/select_ingredients", select_ingredients: @select_ingredients %>
+  <%= render "selections/shared/display_dish", { display_dish: @display_dish, have_effect_ingredient: @have_effect_ingredient} %>
+
+  <%= form_with url: selections_calculate_dishes_path, method: :post, local: true do |f| %>
+    <h4>食材選び</h4>
+    <p><%= f.submit "料理する" %></p>
+    <div class="row">
+      <% @ingredients.each_with_index do |ingredient, i| %>
+        <div class="col-md-4 col-lg-3 col-xl-2 col-6 row row-cols-1 m-1 py-2 border" style="max-width: 200px;">
+          <div class="col row">
+            <div class="col-5">
+              <%= link_to ingredient_path(ingredient.id), class: "text-decoration-none" do %>
+                <%= image_tag ingredient.image.variant(resize_to_limit: [60, 60]) %>
+              <% end %>
+            </div>
+            <dir class="col-7">
+              <%= f.check_box :ingredient_ids, { multiple: true, include_hidden: false, class: "btn-check", id: "btn-check-outlined-#{i}" }, ingredient.id, nil %>
+              <%= f.label "check", class: "btn btn-outline-success btn-sm", for: "btn-check-outlined-#{i}" %>
+            </dir>
+          </div>
+          <div class="col">
+            <%= ingredient.name %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

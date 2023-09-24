@@ -1,0 +1,13 @@
+<% if display_dish.present? %>
+<p>
+  出来上がった料理
+  <%= display_dish.name %>
+  <%= link_to dish_path(display_dish.id), class: "text-decoration-none" do %>
+    <%= image_tag display_dish.image.variant(resize_to_limit: [135, 165]) %>
+  <% end %>
+  <%= display_dish.flavor_text %>
+  <% if have_effect_ingredient.present? %>
+    <%= have_effect_ingredient.cooking_effect %>
+  <% end %>
+</p>
+<% end %>

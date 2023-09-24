@@ -36,3 +36,14 @@ document.addEventListener("click", ({target}) => {
     });
   }
 });
+
+document.addEventListener("change", ({target}) => {
+  if (target.type === "checkbox") {
+    const maxCheckedCount = 3;
+    const checkedCheckBoxes = document.querySelectorAll("input[type=checkbox]:checked");
+    const uncheckedCheckBoxes = document.querySelectorAll("input[type=checkbox]:not(:checked)");
+    uncheckedCheckBoxes.forEach(checkbox => {
+      checkbox.disabled = checkedCheckBoxes.length >= maxCheckedCount;
+    });
+  }
+});
