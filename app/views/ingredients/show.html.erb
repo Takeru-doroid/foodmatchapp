@@ -1,7 +1,0 @@
-<h1>食材詳細ページ</h1>
-<p>名前：<%= @ingredient.name %></p>
-<p>テキスト：<%= @ingredient.flavor_text %></p>
-<% if @ingredient.cooking_effect.present? %>
-<p>料理時効果：<%= @ingredient.cooking_effect %></p>
-<% end %>
-<%= link_to "戻る", :back %>

@@ -2,7 +2,7 @@ class SelectionsController < ApplicationController
   include SelectionsHelper
 
   def display_selection
-    @ingredients = Ingredient.all
+    @category_ingredients = Category.all.includes(ingredients: { image_attachment: :blob })
     @select_ingredients = Ingredient.where(id: params[:select_ingredients_ids])
     all_dish_ids = params[:dish_ids]&.map(&:to_i)
     @display_dish = find_display_dish(all_dish_ids, @select_ingredients)
