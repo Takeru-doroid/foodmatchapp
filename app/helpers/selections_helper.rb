@@ -1,37 +1,15 @@
 module SelectionsHelper
   def find_display_dish(category_ids, select_ingredients)
     all_category_ids = category_ids&.map(&:to_i)
-    
     if all_category_ids.present?
       duplicate_categories = all_category_ids.tally.select{ |k, v| v > 1 }.map(&:first)
-      
       if duplicate_categories.present?
         if duplicate_categories.include?(3)
-          # 重複カテゴリが魚類の場合
           if select_ingredients.pluck(:name).include?("上ケモノ肉")
-            # 重複カテゴリが魚類かつ肉類の場合、かつ上ケモノ肉が選ばれている場合
             Dish.find_by(name: "上山海焼き")
           elsif all_category_ids.include?(2)
             Dish.find_by(name: "山海焼き")
           else
-            # 単品料理
-            pluck_dish_id = CategoryDish.where(category_id: duplicate_categories).pluck(:dish_id)
-            display_dish = CategoryDish.where(dish_id: pluck_dish_id)
-                                      .group(:dish_id)
-                                      .count.select{ |k, v| v == 1 }
-                                      .map(&:first)
-            return Dish.find_by(id: display_dish)
-          end
-        else
-          # 重複カテゴリがキノコ類か肉類の場合
-          if select_ingredients.pluck(:name).include?("上ケモノ肉") && select_ingredients.pluck(:category_id).include?(3)
-            # 上ケモノ肉が選ばれ、魚類も含まれている場合
-            Dish.find_by(name: "上山海焼き")
-          elsif select_ingredients.pluck(:category_id).include?(2) && select_ingredients.pluck(:category_id).include?(3)
-            # 肉類かつ魚類の組み合わせの場合
-            Dish.find_by(name: "山海焼き")
-          else
-            # 単品料理
             pluck_dish_id = CategoryDish.where(category_id: duplicate_categories).pluck(:dish_id)
             display_dish = CategoryDish.where(dish_id: pluck_dish_id)
                                       .group(:dish_id)
@@ -39,13 +17,34 @@ module SelectionsHelper
                                       .map(&:first)
             Dish.find_by(id: display_dish)
           end
+        else
+          pluck_dish_id = CategoryDish.where(category_id: duplicate_categories).pluck(:dish_id)
+          display_dish = CategoryDish.where(dish_id: pluck_dish_id)
+                                    .group(:dish_id)
+                                    .count.select{ |k, v| v == 1 }
+                                    .map(&:first)
+          Dish.find_by(id: display_dish)
         end
       else
-        # 重複カテゴリがない場合 = 3種カテゴリ（キノコ類/肉類/魚類）の組み合わせ
-        if select_ingredients.pluck(:name).include?("上ケモノ肉")
+        if select_ingredients.pluck(:name).include?("上ケモノ肉") && all_category_ids.include?(3)
           Dish.find_by(name: "上山海焼き")
-        else
+        elsif all_category_ids.include?(2) && all_category_ids.include?(3)
           Dish.find_by(name: "山海焼き")
+        elsif all_category_ids.count > 1
+          display_dish = Dish.joins(:category_dishes)
+                            .where(category_dishes: { category_id: all_category_ids })
+                            .pluck(:dish_id)
+                            .tally
+                            .select{ |k, v| v > 1 }
+                            .map(&:first)
+          Dish.find_by(id: display_dish)
+        else
+          pluck_dish_id = CategoryDish.where(category_id: all_category_ids).pluck(:dish_id)
+          display_dish = CategoryDish.where(dish_id: pluck_dish_id)
+                                    .group(:dish_id)
+                                    .count.select{ |k, v| v == 1 }
+                                    .map(&:first)
+          Dish.find_by(id: display_dish)
         end
       end
     end
