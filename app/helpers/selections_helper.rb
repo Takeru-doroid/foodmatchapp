@@ -30,23 +30,35 @@ module SelectionsHelper
           Dish.find_by(name: "上山海焼き")
         elsif all_category_ids.include?(2) && all_category_ids.include?(3)
           Dish.find_by(name: "山海焼き")
-        elsif select_ingredients.pluck(:name).include?("ガンバリ草") && select_ingredients.count == 1
-          Dish.find_by(name: "丸ごと焼き")
         elsif all_category_ids.count > 1
-          display_dish = Dish.joins(:category_dishes).
-            where(category_dishes: { category_id: all_category_ids }).
-            pluck(:dish_id).
-            tally.
-            select { |k, v| v > 1 }.
-            map(&:first)
-          Dish.find_by(id: display_dish)
+          if all_category_ids.include?(2) && all_category_ids.include?(4)
+            Dish.find_by(name: "包み焼き肉")
+          elsif all_category_ids.include?(3) && all_category_ids.include?(4)
+            Dish.find_by(name: "包み焼き魚")
+          elsif all_category_ids.include?(1) && all_category_ids.include?(4)
+            Dish.find_by(name: "包み焼きキノコ")
+          elsif all_category_ids.include?(2) && all_category_ids.include?(5) && select_ingredients.count == 2
+            Dish.find_by(name: "串焼き肉")
+          else
+            display_dish = Dish.joins(:category_dishes).
+              where(category_dishes: { category_id: all_category_ids }).
+              pluck(:dish_id).
+              tally.
+              select { |k, v| v > 1 }.
+              map(&:first)
+            Dish.find_by(id: display_dish)
+          end
         else
-          pluck_dish_id = CategoryDish.where(category_id: all_category_ids).pluck(:dish_id)
-          display_dish = CategoryDish.where(dish_id: pluck_dish_id).
-            group(:dish_id).
-            count.select { |k, v| v == 1 }.
-            map(&:first)
-          Dish.find_by(id: display_dish)
+          if select_ingredients.pluck(:name).include?("ガンバリ草")
+            Dish.find_by(name: "丸ごと焼き")
+          else
+            pluck_dish_id = CategoryDish.where(category_id: all_category_ids).pluck(:dish_id)
+            display_dish = CategoryDish.where(dish_id: pluck_dish_id).
+              group(:dish_id).
+              count.select { |k, v| v == 1 }.
+              map(&:first)
+            Dish.find_by(id: display_dish)
+          end
         end
       end
     end
