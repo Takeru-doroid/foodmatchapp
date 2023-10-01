@@ -8,7 +8,6 @@ categories = [
 categories.each do |id, name|
   Category.find_or_create_by!(id: id, name: name)
 end
-
 ingredients = [
   [ 1, "ソラダケ", "空島の木の根元に生えるポピュラーなキノコ。食べるとハート回復の効果がある。", "", 1, "mushrooms" ],
   [ 2, "ガンバリダケ", "大地のエネルギーをたくさんため込んだ栄養満点のキノコ。料理に使うとがんばりが回復する効果を得られる。", "がんばり回復", 1, "mushrooms" ],
@@ -42,7 +41,6 @@ ingredients.each do |id, name, flavor_text, cooking_effect, category_id, categor
   ingredient = Ingredient.find_or_create_by!(id: id, name: name, flavor_text: flavor_text, cooking_effect: cooking_effect, category_id: category_id)
   ingredient.image.attach(io: File.open(Rails.root.join("app/assets/images/ingredients/#{category_name}/#{name}.JPG")), filename: "#{name}.JPG")
 end
-
 dishes = [
   [ 1, "串焼きキノコ", "キノコの風味が香るシンプルな串焼き。カラフルな見た目が食欲をそそる。" ],
   [ 2, "串焼き肉キノコ添え", "新鮮な肉をメインに、山の恵みをふんだんに使ったボリューム満点の串焼き料理。" ],
@@ -64,7 +62,6 @@ dishes.each do |id, name, flavor_text|
   dish = Dish.find_or_create_by!(id: id, name: name, flavor_text: flavor_text)
   dish.image.attach(io: File.open(Rails.root.join("app/assets/images/dishes/#{name}.png")), filename: "#{name}.png")
 end
-
 category_dishes = [
   [ 1, 1, 1 ],
   [ 2, 1, 2 ],

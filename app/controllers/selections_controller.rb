@@ -3,9 +3,7 @@ class SelectionsController < ApplicationController
 
   def display_selection
     @category_ingredients = Category.all.includes(ingredients: { image_attachment: :blob })
-
     @select_ingredients = Ingredient.where(id: params[:select_ingredients_ids])
-
     @display_dish = find_display_dish(params[:category_ids], @select_ingredients)
     @have_effect_ingredient = find_cooking_effect(@select_ingredients)
   end

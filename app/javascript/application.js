@@ -7,7 +7,6 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 document.addEventListener("click", ({target}) => {
-  // password類の表示/非表示Toggle
   if (target.matches("#toggle-password-icon")) {
     const userPass = document.getElementById("user_password");
     const flg = userPass.type === "password";
@@ -29,7 +28,6 @@ document.addEventListener("click", ({target}) => {
       target.classList.toggle("fa-eye-slash", !flg_3);
     }
   }
-  // フラッシュメッセージフェードアウト
   if (target.matches(".close")) {
     const alertMsg = document.getElementById("flash-message");
     alertMsg.classList.add("fade-out");
@@ -40,7 +38,6 @@ document.addEventListener("click", ({target}) => {
 });
 
 document.addEventListener("change", ({target}) => {
-  // 食材選択数の制限
   if (target.type === "checkbox") {
     const maxCheckedCount = 3;
     const checkedCheckBoxes = document.querySelectorAll("input[type=checkbox]:checked");
@@ -49,7 +46,6 @@ document.addEventListener("change", ({target}) => {
       checkbox.disabled = checkedCheckBoxes.length >= maxCheckedCount;
     });
   }
-  // カテゴリ選択リスト
   if (target.matches("#category-select")) {
     const selectedCategoryId = target.value;
     const ingredientsContainers = document.querySelectorAll("#ingredients-container");
