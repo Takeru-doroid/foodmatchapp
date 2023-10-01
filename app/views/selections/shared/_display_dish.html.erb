@@ -1,7 +1,11 @@
 <% if display_dish.present? %>
   <p>
     出来上がった料理
-    <%= display_dish.name %>
+    <% if have_effect_ingredient.present? %>
+      <%= add_dish_name[have_effect_ingredient.cooking_effect] + display_dish.name %>
+    <% else %>
+      <%= display_dish.name %>
+    <% end %>
     <% if display_dish.image.attached? %>
       <button class="btn" data-bs-toggle="modal" data-bs-target="#Modal-<%= display_dish.name %>">
         <%= image_tag display_dish.image.variant(resize_to_limit: [135, 165]), alt: "#{display_dish.name}の画像" %>
@@ -15,7 +19,11 @@
             <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
           </div>
           <div class="modal-body">
-            <p>名前：<%= display_dish.name %></p>
+            <% if have_effect_ingredient.present? %>
+              <p>名前：<%= add_dish_name[have_effect_ingredient.cooking_effect] + display_dish.name %></p>
+            <% else %>
+              <p>名前：<%= display_dish.name %></p>
+            <% end %>
             <p>テキスト：<%= display_dish.flavor_text %></p>
             <% if have_effect_ingredient.present? %>
               <p><%= have_effect_ingredient.cooking_effect %></p>

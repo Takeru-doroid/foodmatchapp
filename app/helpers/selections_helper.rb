@@ -65,7 +65,7 @@ module SelectionsHelper
   end
 
   def find_cooking_effect(select_ingredients)
-    cooking_effect_records = select_ingredients.where.not(cooking_effect: [""])
+    cooking_effect_records = select_ingredients.where.not(cooking_effect: "")
     if cooking_effect_records.present?
       cooking_effect_counts = cooking_effect_records.pluck(:cooking_effect).tally
       if cooking_effect_counts.keys.length == 1
@@ -73,5 +73,20 @@ module SelectionsHelper
         Ingredient.find_by(cooking_effect: have_effect)
       end
     end
+  end
+
+  def add_dish_name
+    add_dish_name = {
+      "がんばり回復" => "がんばり",
+      "移動力アップ" => "ゴーゴー",
+      "エレキガード" => "エレキ",
+      "暑さガード" => "ひんやり",
+      "寒さガード" => "ピリ辛",
+      "攻撃力アップ" => "チカラ",
+      "MAXがんばり" => "スタミナ",
+      "瘴気ダメージ回復" => "サンサン",
+      "防御アップ" => "カチコチ",
+      "静かさアップ" => "しのび"
+    }
   end
 end
