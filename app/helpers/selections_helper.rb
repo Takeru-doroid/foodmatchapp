@@ -76,7 +76,7 @@ module SelectionsHelper
   end
 
   def add_dish_name
-    add_dish_name = {
+    {
       "がんばり回復" => "がんばり",
       "移動力アップ" => "ゴーゴー",
       "エレキガード" => "エレキ",
@@ -86,7 +86,7 @@ module SelectionsHelper
       "MAXがんばり" => "スタミナ",
       "瘴気ダメージ回復" => "サンサン",
       "防御アップ" => "カチコチ",
-      "静かさアップ" => "しのび"
+      "静かさアップ" => "しのび",
     }
   end
 end
