@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :category do
-    name { Faker::Food.name }
+    name { "キノコ類" }
   end
 end

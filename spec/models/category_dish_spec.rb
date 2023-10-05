@@ -2,12 +2,20 @@ require 'rails_helper'
 
 RSpec.describe CategoryDish, type: :model do
   describe "CategoryDishモデル" do
-    let(:category) { create(:category) }
-    let(:dish) { create(:dish) }
-    let(:category_dish) { create(:category_dish, category: category, dish: dish) }
+    let(:category_dish) { create(:category_dish) }
 
-    it "CategoryDishの登録に問題ないこと" do
+    it "CategoryDishの情報に問題ない時、有効なこと" do
       expect(category_dish).to be_valid
+    end
+
+    it "category_idがnilの時、無効なこと" do
+      category_dish.category_id = nil
+      expect(category_dish).to be_invalid
+    end
+
+    it "dish_idがnilの時、無効なこと" do
+      category_dish.dish_id = nil
+      expect(category_dish).to be_invalid
     end
   end
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :dish do
-    name        { Faker::Food.ingredient }
-    flavor_text { Faker::Lorem.sentence }
+    name { "串焼きキノコ" }
+    flavor_text { Faker::Lorem.word }
   end
 end
