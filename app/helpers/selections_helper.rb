@@ -39,6 +39,8 @@ module SelectionsHelper
             Dish.find_by(name: "包み焼きキノコ")
           elsif all_category_ids.include?(2) && all_category_ids.include?(5) && select_ingredients.count == 2
             Dish.find_by(name: "串焼き肉")
+          elsif all_category_ids.include?(3) && all_category_ids.include?(5) && select_ingredients.count == 2
+            Dish.find_by(name: "串焼き魚")
           else
             display_dish = Dish.joins(:category_dishes).
               where(category_dishes: { category_id: all_category_ids }).
