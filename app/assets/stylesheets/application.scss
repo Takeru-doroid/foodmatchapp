@@ -14,21 +14,34 @@
   // Custom bootstrap variables must be set or imported *before* bootstrap.
   @import "bootstrap";
 
-  .form-signin{
+  :root {
+    --bg-beige: rgba(245, 245, 220, 1);
+    --bg-turquoise: rgba(64, 224, 208, 1);
+    --bg-gray: rgba(169, 169, 169, 1);
+    --bg-ivory: rgba(255, 255, 240, 1);
+  }
+
+  .background-container {
+    background-image: image-url("Zelda_BackImage1.jpg");
+    background-color: rgba(255, 255, 255, 0.2);
+    background-blend-mode: lighten;
+  }
+
+  .form-signin {
     width: 100%;
     max-width: 420px;
     padding: 30px;
     margin: auto;
   }
 
-  .form-edit{
+  .form-edit {
     width: 100%;
     max-width: 500px;
     padding: 30px;
     margin: auto;
   }
 
-  .fade-in{
+  .fade-in {
     animation-name: fadeInAnime;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
@@ -47,7 +60,7 @@
     }
   }
 
-  .fade-out{
+  .fade-out {
     animation-name: fadeOutAnime;
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
@@ -67,8 +80,69 @@
     }
   }
 
-  .field_with_errors{
+  .field_with_errors {
     input {
       @extend .is-invalid;
     }
   }
+
+
+  .display-dish-icon:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\e4c6";
+    padding-right: 0.5rem;
+  }
+
+  .ingredient-icon:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f787";
+    padding-right: 0.5rem;
+  }
+
+  .cooking-effect-icon:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f005";
+    font-weight: 900;
+  }
+
+  .bg-displaydish {
+    background-color: var(--bg-beige);
+  }
+
+  .cooking-input-btn {
+    font-size: large;
+    letter-spacing: 1rem;
+    padding: 0.5rem 4rem;
+    background-color: var(--bg-beige);
+    border: 1px solid var(--bg-gray);
+  }
+
+  .bg-ingredient {
+    background-color: var(--bg-beige);
+  }
+
+  .bg-ingredient label {
+    background-color: var(--bg-ivory);
+  }
+
+  .ingredient-check-label {
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0px 5px var(--bg-gray);
+    border: 1px solid var(--bg-gray);
+  }
+
+  .ingredient-check-label:hover {
+    margin-top: 2px;
+    box-shadow: 0px 3px var(--bg-gray);
+  }
+
+  .btn-check:checked + .ingredient-check-label {
+    background-color: var(--bg-turquoise);
+    margin-top: 5px;
+    box-shadow: none;
+  }
+
+  .btn-check:disabled + .ingredient-check-label {
+    opacity: 0.5;
+  } 

@@ -1,48 +1,88 @@
-<div class="container">
-  <%= render "selections/shared/select_ingredients", select_ingredients: @select_ingredients %>
-  <%= render "selections/shared/display_dish", { display_dish: @display_dish, have_effect_ingredient: @have_effect_ingredient} %>
+<div class="container py-2">
+  <%= render "selections/shared/display_dish", { display_dish: @display_dish, have_effect_ingredient: @have_effect_ingredient, select_ingredients: @select_ingredients } %>
   <%= form_with url: selections_calculate_dishes_path, method: :post, local: true do |f| %>
-    <p>
-      <h4>食材選び</h4>
-      <p><%= f.submit "料理する" %></p>
-    </p>
-    <select class="form-select" id="category-select">
-      <option value="">--カテゴリを選ぶ--</option>
-      <% @category_ingredients.each_with_index do |category, i| %>
-        <option value="<%= i + 1 %>"><%= category.name %></option>
-      <% end %>
-    </select>
-    <div class="row">
+    <div class="row d-flex justify-content-between p-3 my-3">
+      <div class="col-md d-flex justify-content-center">
+        <h4 class="d-flex align-items-center ingredient-icon">食材選び</h4>
+      </div>
+      <div class="col-md d-flex justify-content-center">
+        <%= f.submit "料理する", class: "cooking-input-btn my-1 fw-bold" %>
+      </div>
+      <div class="col-md d-flex justify-content-center">
+        <select class="form-select my-1" id="category-select">
+          <option value="">カテゴリを選ぶ</option>
+          <% @category_ingredients.each_with_index do |category, i| %>
+            <option value="<%= i + 1 %>"><%= category.name %></option>
+          <% end %>
+        </select>
+        <div class="d-flex d-lg-none">
+          <button type="button" class="btn bg-displaydish m-1" data-bs-toggle="collapse" data-bs-target="#collapsehowtoplay" aria-expanded="false" aria-controls="collapsehowtoplay">
+            <i class="fa-solid fa-lightbulb fa-xl"></i>
+          </button>
+        </div>
+      </div>
+      <div class="collapse" id="collapsehowtoplay">
+        <div class="card card-body bg-displaydish">
+          <p class="py-1 fw-bold">遊び方</p>
+          <ol>
+            <li class="py-1">好きな食材を"選択"する</li>
+            <li class="py-1">料理する"を押して、料理をつくる</li>
+            <p class="pt-3 text-danger">
+              <i class="fa-solid fa-circle-exclamation pe-2"></i>
+              選択できるのは、3つまで
+            </p>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="row row-cols-2 row-cols-xl-6 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-2">
       <% @category_ingredients.each do |category| %>
         <% category.ingredients.each do |ingredient| %>
-          <div class="col-2 m-1 border" id="ingredients-container" data-category="<%= category.id %>" style="max-width: 200px;" role="tabpanel">
-            <% if ingredient.image.attached? %>
-              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#Modal-<%= ingredient.name %>">
-                <%= image_tag ingredient.image.variant(resize_to_limit: [60, 60]), alt: "#{ingredient.name}の画像" %>
-              </button>
-            <% end %>
-            <div class="modal fade" id="Modal-<%= ingredient.name %>" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">詳細</h5>
-                    <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
-                  </div>
-                  <div class="modal-body">
-                    <p>名前：<%= ingredient.name %></p>
-                    <p>テキスト：<%= ingredient.flavor_text %></p>
-                    <% if ingredient.cooking_effect.present? %>
-                      <p><%= ingredient.cooking_effect %></p>
-                    <% end %>
-                  </div>
-                  <div class="modal-footer">
-                    <p>Footer</p>
+          <div class="col" id="ingredients-container" data-category="<%= category.id %>" role="tabpanel">
+            <div class="card bg-ingredient">
+              <div class="row g-0">
+                <div class="col-md-4 d-flex justify-content-center">
+                  <% if ingredient.image.attached? %>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#Modal-<%= ingredient.name %>">
+                      <%= image_tag ingredient.image.variant(resize_to_limit: [60, 60]), class: "rounded", alt: "#{ingredient.name}の画像" %>
+                    </button>
+                  <% end %>
+                </div>
+                <div class="col-md-8">
+                  <div class="d-flex justify-content-center card-body">
+                    <%= f.check_box :ingredient_ids, { multiple: true, include_hidden: false, class: "btn-check", id: "#{ingredient.name}" }, ingredient.id, nil %>
+                    <%= f.label "選択", for: "#{ingredient.name}", class: "card-text ingredient-check-label py-1 px-4 fw-bold" %>
                   </div>
                 </div>
               </div>
             </div>
-            <%= f.check_box :ingredient_ids, { multiple: true, include_hidden: false, class: "btn-check", id: "#{ingredient.name}" }, ingredient.id, nil %>
-            <%= f.label "check", class: "btn btn-outline-success btn-sm", for: "#{ingredient.name}" %>
+          </div>
+          <div class="modal fade" id="Modal-<%= ingredient.name %>" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title">詳細</h6>
+                  <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="ingredient-icon"><%= ingredient.name %></h5>
+                      <% if ingredient.cooking_effect.present? %>
+                        <div class="card-subtitle ps-1 text-body-secondary cooking-effect-icon">
+                          <%= ingredient.cooking_effect %>
+                        </div>
+                      <% end %>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-text">
+                        <%= ingredient.flavor_text %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
       <% end %>
