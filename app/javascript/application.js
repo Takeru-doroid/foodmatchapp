@@ -50,7 +50,7 @@ document.addEventListener("change", ({target}) => {
     const selectedCategoryId = target.value;
     const ingredientsContainers = document.querySelectorAll("#ingredients-container");
     ingredientsContainers.forEach(container => {
-      container.style.display = selectedCategoryId == ""  || container.dataset.category == selectedCategoryId ? "block" : "none";
+      container.style.display = selectedCategoryId == "" || container.dataset.category == selectedCategoryId ? "block" : "none";
     })
   }
 });
