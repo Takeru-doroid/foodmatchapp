@@ -104,9 +104,12 @@ RSpec.describe "Selections", type: :system do
         expect(page).to have_selector "img[alt=#{dish[0].name}の画像]"
       end
 
-      it "選択した食材名が表示されていること" do
+      it "選択した食材名が詳細ページへのリンクになっていること" do
         select_ingredient([0])
-        expect(page).to have_selector ".select-ingredients", text: "#{ingredient[0].name}"
+        within ".select-ingredients" do
+          click_on "#{ingredient[0].name}"
+        end
+        expect(current_path).to eq ingredient_path(ingredient[0])
       end
 
       it "cooking_effectを持つ食材を使用した料理には、名前の先頭に別名が付与されること" do
