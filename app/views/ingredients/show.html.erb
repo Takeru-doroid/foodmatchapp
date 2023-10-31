@@ -1,0 +1,8 @@
+<h4>ここは、<%= @ingredient.name %>の詳細ページです</h4>
+<%= image_tag @ingredient.image.variant(resize_to_limit: [100, 100]), alt: "#{@ingredient.name}の画像" %>
+<%= @ingredient.category.name %>
+<%= @ingredient.flavor_text %>
+<% if @ingredient.cooking_effect.present? %>
+  <%= @ingredient.cooking_effect %>
+<% end %>
+<p><%= link_to "戻る", :back %></p>

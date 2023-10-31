@@ -34,12 +34,12 @@
           <% select_ingredients.each_with_index do |ingredient, i| %>
             <% if i != select_ingredients.length - 1 %>
               <div class="col-lg d-flex align-items-center border rounded shadow-sm bg-ingredient">
-                <%= ingredient.name %>
+                <%= link_to "#{ingredient.name}", ingredient_path(ingredient.id) %>
               </div>
               <div class="col-auto d-flex justify-content-center">+</div>
             <% else %>
               <div class="col-lg d-flex align-items-center border rounded shadow-sm bg-ingredient">
-                <%= ingredient.name %>
+                <%= link_to "#{ingredient.name}", ingredient_path(ingredient.id) %>
               </div>
             <% end %>
           <% end %>

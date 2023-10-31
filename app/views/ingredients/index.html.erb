@@ -1,0 +1,15 @@
+<h5><%= link_to "topへ", root_path %></h5>
+<% @category_ingredients.each do |category| %>
+  <% category.ingredients.each do |ingredient| %>
+    <div>
+      <%= image_tag ingredient.image.variant(resize_to_limit: [60, 60]), alt: "#{ingredient.name}の画像" %>
+      <%= link_to ingredient_path(ingredient.id) do %>
+        <%= ingredient.name %>
+      <% end %>
+      <%= ingredient.category.name %>
+      <% if ingredient.cooking_effect.present? %>
+        <%= ingredient.cooking_effect %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

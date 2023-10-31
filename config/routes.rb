@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
   end
   resources :users, only: [:show]
+  resources :ingredients, only: [:index, :show]
   get 'selections/display_selection', to: 'selections#display_selection'
   post 'selections/calculate_dishes', to: 'selections#calculate_dishes'
 end
