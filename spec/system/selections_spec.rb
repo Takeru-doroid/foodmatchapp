@@ -14,7 +14,7 @@ RSpec.describe "Selections", type: :system do
         create(:ingredient, name: "ハイラル草", category: category[3]),
         create(:ingredient, name: "ガンバリ草", category: category[3], cooking_effect: "がんばり回復"),
         create(:ingredient, name: "リンゴ", category: category[4]),
-        create(:ingredient, name: "イチゴ", category: category[4])
+        create(:ingredient, name: "イチゴ", category: category[4]),
       ]
     end
     let!(:category) do
@@ -23,7 +23,7 @@ RSpec.describe "Selections", type: :system do
         create(:category, id: 2, name: "肉類"),
         create(:category, id: 3, name: "魚類"),
         create(:category, id: 4, name: "野菜類"),
-        create(:category, id: 5, name: "果実類")
+        create(:category, id: 5, name: "果実類"),
       ]
     end
     let!(:category_dish) do
@@ -51,7 +51,7 @@ RSpec.describe "Selections", type: :system do
         create(:category_dish, category: category[0], dish: dish[13]),
         create(:category_dish, category: category[4], dish: dish[13]),
         create(:category_dish, category: category[3], dish: dish[14]),
-        create(:category_dish, category: category[4], dish: dish[14])
+        create(:category_dish, category: category[4], dish: dish[14]),
       ]
     end
     let!(:dish) do
@@ -70,7 +70,7 @@ RSpec.describe "Selections", type: :system do
         create(:dish, name: "包み焼き魚"),
         create(:dish, name: "煮込み果実"),
         create(:dish, name: "果実のキノコあえ"),
-        create(:dish, name: "蒸し焼き果実")
+        create(:dish, name: "蒸し焼き果実"),
       ]
     end
 
