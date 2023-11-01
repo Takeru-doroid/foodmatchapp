@@ -34,12 +34,18 @@
           <% select_ingredients.each_with_index do |ingredient, i| %>
             <% if i != select_ingredients.length - 1 %>
               <div class="col-lg d-flex align-items-center border rounded shadow-sm bg-ingredient">
-                <%= link_to "#{ingredient.name}", ingredient_path(ingredient.id) %>
+                <%= link_to ingredient_path(ingredient.id), class: "link-with-icon" do %>
+                  <%= ingredient.name %>
+                  <i class="fa-solid fa-chevron-right"></i>
+                <% end %>
               </div>
               <div class="col-auto d-flex justify-content-center">+</div>
             <% else %>
               <div class="col-lg d-flex align-items-center border rounded shadow-sm bg-ingredient">
-                <%= link_to "#{ingredient.name}", ingredient_path(ingredient.id) %>
+                <%= link_to ingredient_path(ingredient.id), class: "link-with-icon" do %>
+                  <%= ingredient.name %>
+                  <i class="fa-solid fa-chevron-right"></i>
+                <% end %>
               </div>
             <% end %>
           <% end %>

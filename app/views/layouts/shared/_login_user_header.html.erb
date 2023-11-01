@@ -8,14 +8,20 @@
     </button>
     <div class="navbar-collapse collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <%= link_to "組み合わせ", selections_display_selection_path, class: "nav-link" %>
+        <li class="nav-item pe-sm-3">
+          <%= link_to selections_display_selection_path, class: "nav-link" do %>
+            <i class="fa-solid fa-utensils fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">組み合わせ</div>
+          <% end %>
         </li>
-        <li class="nav-item">
-          <%= link_to "食材一覧", ingredients_path, class: "nav-link" %>
+        <li class="nav-item pe-sm-3">
+          <%= link_to ingredients_path, class: "nav-link" do %>
+            <i class="fa-solid fa-carrot fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">食材一覧</div>
+          <% end %>
         </li>
       </ul>
-      <%= link_to user_path(current_user), class: "nav-link" do %>
+      <%= link_to user_path(current_user), class: "nav-link d-flex justify-content-center" do %>
         <% if current_user.avatar.attached? %>
           <%= image_tag current_user.avatar.variant(resize_to_limit: [50, 50]), class: "rounded-circle", alt: "ユーザーのアバター画像" if current_user.avatar.present? %>
         <% else %>

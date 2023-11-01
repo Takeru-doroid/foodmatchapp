@@ -1,8 +1,28 @@
-<h4>ここは、<%= @ingredient.name %>の詳細ページです</h4>
-<%= image_tag @ingredient.image.variant(resize_to_limit: [100, 100]), alt: "#{@ingredient.name}の画像" %>
-<%= @ingredient.category.name %>
-<%= @ingredient.flavor_text %>
-<% if @ingredient.cooking_effect.present? %>
-  <%= @ingredient.cooking_effect %>
-<% end %>
-<p><%= link_to "戻る", :back %></p>
+<div class="container p-4 d-flex justify-content-center">
+  <div class="bg-ingredient w-75 border rounded p-md-5 p-2">
+    <div class="row">
+      <div class="col-lg-auto d-flex align-items-center justify-content-center">
+        <%= image_tag @ingredient.image.variant(resize_to_limit: [97, 97]), alt: "#{@ingredient.name}の画像" %>
+      </div>
+      <div class="col-lg">
+        <div class="text-center fs-4 py-2"><%= @ingredient.name %></div>
+        <div class="d-md-flex d-block justify-content-evenly py-sm-3 py-1">
+          <div class="text-body-secondary text-center fs-6">
+            カテゴリ：<%= @ingredient.category.name %>
+          </div>
+          <% if @ingredient.cooking_effect.present? %>
+            <div class="text-body-secondary text-center fs-6">
+              料理時効果：<%= @ingredient.cooking_effect %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-text px-md-5 py-1"><%= @ingredient.flavor_text %></div>
+      </div>
+    </div>
+    <p>
+      <%= link_to :back, class: "link-with-icon" do %>
+        戻る<i class="fa-solid fa-chevron-right"></i>
+      <% end %>
+    </p>
+  </div>
+</div>

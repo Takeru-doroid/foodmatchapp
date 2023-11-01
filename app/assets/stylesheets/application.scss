@@ -146,3 +146,7 @@
   .btn-check:disabled + .ingredient-check-label {
     opacity: 0.5;
   } 
+
+  .link-with-icon:hover i {
+    padding-left: 0.5rem;
+  }
