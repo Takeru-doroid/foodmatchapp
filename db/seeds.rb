@@ -39,7 +39,7 @@ ingredients = [
 ]
 ingredients.each do |id, name, flavor_text, cooking_effect, category_id, category_name|
   ingredient = Ingredient.find_or_create_by!(id: id, name: name, flavor_text: flavor_text, cooking_effect: cooking_effect, category_id: category_id)
-  ingredient.image.attach(io: File.open(Rails.root.join("app/assets/images/ingredients/#{category_name}/#{name}.JPG")), filename: "#{name}.JPG")
+  ingredient.image.attach(io: File.open("app/assets/images/ingredients/#{category_name}/#{name}.JPG"), filename: "#{name}.JPG")
 end
 dishes = [
   [ 1, "串焼きキノコ", "キノコの風味が香るシンプルな串焼き。カラフルな見た目が食欲をそそる。" ],
@@ -60,7 +60,7 @@ dishes = [
 ]
 dishes.each do |id, name, flavor_text|
   dish = Dish.find_or_create_by!(id: id, name: name, flavor_text: flavor_text)
-  dish.image.attach(io: File.open(Rails.root.join("app/assets/images/dishes/#{name}.png")), filename: "#{name}.png")
+  dish.image.attach(io: File.open("app/assets/images/dishes/#{name}.png"), filename: "#{name}.png")
 end
 category_dishes = [
   [ 1, 1, 1 ],
