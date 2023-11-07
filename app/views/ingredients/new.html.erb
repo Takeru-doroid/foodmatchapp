@@ -1,0 +1,42 @@
+<% if @ingredient.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @ingredient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<h4>食材作成</h4>
+<%= form_with model: @ingredient, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, autofocus: true %>
+
+  <%= f.label :flavor_text %>
+  <%= f.text_area :flavor_text, autofocus: true %>
+
+  <%= f.label :cooking_effect %>
+  <%= f.text_field :cooking_effect, autofocus: true %>
+
+  <%= f.label :category_id %>
+  <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "カテゴリを選ぶ"  %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+  <div><%= f.submit "作成する" %></div>
+<% end %>
+<div>
+  <h4>現在の食材一覧</h4>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>食材名</th>
+    </tr>
+    <% @ingredients.each do |ingredient| %>
+      <tr>
+        <td><%= ingredient.id %></td>
+        <td><%= ingredient.name %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

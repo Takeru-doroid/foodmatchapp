@@ -1,0 +1,35 @@
+<% if @category_dish.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @category_dish.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<h4>カテゴリ-料理紐付け</h4>
+<%= form_with model: @category_dish, local: true do |f| %>
+  <%= f.label :category_id %>
+  <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "カテゴリを選ぶ"  %>
+
+  <%= f.label :dish_id %>
+  <%= f.collection_select :dish_id, Dish.all, :id, :name, include_blank: "料理を選ぶ"  %>
+  <div><%= f.submit "作成する" %></div>
+<% end %>
+<div>
+  <h4>現在のリレーション一覧</h4>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>カテゴリid</th>
+      <th>料理id</th>
+    </tr>
+    <% @category_dishes.each do |category_dish| %>
+      <tr>
+        <td><%= category_dish.id %></td>
+        <td><%= category_dish.category_id %></td>
+        <td><%= category_dish.dish_id %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

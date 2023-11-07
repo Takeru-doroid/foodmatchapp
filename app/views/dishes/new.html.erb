@@ -1,0 +1,36 @@
+<% if @dish.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @dish.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<h4>料理作成</h4>
+<%= form_with model: @dish, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, autofocus: true %>
+
+  <%= f.label :flavor_text %>
+  <%= f.text_area :flavor_text, autofocus: true %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+  <div><%= f.submit "作成する" %></div>
+<% end %>
+<div>
+  <h4>現在の料理一覧</h4>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>カテゴリ名</th>
+    </tr>
+    <% @dishes.each do |dish| %>
+      <tr>
+        <td><%= dish.id %></td>
+        <td><%= dish.name %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
