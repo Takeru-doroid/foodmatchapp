@@ -4,8 +4,7 @@ FactoryBot.define do
     flavor_text { Faker::Lorem.word }
     after(:build) do |ingredient|
       if ingredient.name == "ソラダケ"
-        ingredient.image.attach(io: File.open("app/assets/images/ingredients/mushrooms/#{ingredient.name}.JPG"),
-                                filename: "#{ingredient.name}.JPG")
+        ingredient.image.attach(io: File.open(Rails.root.join("spec", "support", "ソラダケ.JPG")), filename: "ソラダケ.JPG")
       end
     end
   end
