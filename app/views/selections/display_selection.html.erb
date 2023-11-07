@@ -44,7 +44,7 @@
                 <div class="col-md-4 d-flex justify-content-center">
                   <% if ingredient.image.attached? %>
                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#Modal-<%= ingredient.name %>">
-                      <%= image_tag ingredient.image.variant(resize_to_limit: [60, 60]), class: "rounded", alt: "#{ingredient.name}の画像" %>
+                      <%= image_tag ingredient.image.variant(resize_to_limit: [60, 60]), class: "rounded", alt: "#{ingredient.name}の画像" if ingredient.image.present? %>
                     </button>
                   <% end %>
                 </div>
