@@ -86,17 +86,18 @@
     }
   }
 
-
   .display-dish-icon:before {
     font-family: "Font Awesome 5 Free";
     content: "\e4c6";
     padding-right: 0.5rem;
+    font-weight: 900;
   }
 
   .ingredient-icon:before {
     font-family: "Font Awesome 5 Free";
     content: "\f787";
     padding-right: 0.5rem;
+    font-weight: 900;
   }
 
   .cooking-effect-icon:before {

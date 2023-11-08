@@ -1,36 +1,60 @@
-<% if @dish.errors.any? %>
-  <div id="error_explanation">
-    <ul>
-      <% @dish.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+<div class="container">
+  <div class="row py-3 m-lg-0 mx-sm-5 mx-2">
+    <div class="col-lg">
+      <div class="p-3 mx-2 mb-3 mb-lg-0 border rounded bg-displaydish">
+        <div class="text-center text-danger fw-bold pb-2">
+          <div class="d-md-block d-none">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            注意点
+          </div>
+          <button type="button" class="btn border-none d-md-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom">
+            <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+            <span class="text-danger fw-bold">注意点</span>
+          </button>
+        </div>
+        <%= render "layouts/shared/error_messages", model: @dish %>
+        <div class="d-md-block d-none">
+          <ul class="mt-3 list-unstyled">
+            <li class="p-3 mb-3 border rounded">料理名・テキストは、必ず入力する</li>
+            <li class="p-3 border rounded">作成したら、料理一覧に追加されているか確認する</li>
+          </ul>
+        </div>
+        <div class="offcanvas offcanvas-bottom bg-displaydish" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasBottom">
+          <div class="offcanvas-header">
+            <div></div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="mt-3 list-unstyled">
+              <li class="mb-3 fw-bold text-danger">料理名・テキストは、必ず入力する</li>
+              <li class="fw-bold text-danger">作成したら、料理一覧に追加されているか確認する</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg">
+      <div class="p-3 mx-2 mb-3 mb-lg-0 border rounded bg-displaydish" style="max-height: 500px;">
+        <h4 class="text-center">料理作成</h4>
+        <%= render "layouts/shared/form", model: @dish %>
+      </div>
+    </div>
+    <div class="col-lg">
+      <div class="p-3 mx-2 border rounded bg-displaydish overflow-auto" style="max-height: 500px;">
+        <h4>現在の料理一覧</h4>
+        <table class="table table-warning table-striped">
+          <tr>
+            <th class="text-center" scope="col">id</th>
+            <th scope="col">料理名</th>
+          </tr>
+          <% @dishes.each do |dish| %>
+            <tr>
+              <th class="text-center" scope="row"><%= dish.id %></th>
+              <td><%= dish.name %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
   </div>
-<% end %>
-<h4>料理作成</h4>
-<%= form_with model: @dish, local: true do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, autofocus: true %>
-
-  <%= f.label :flavor_text %>
-  <%= f.text_area :flavor_text, autofocus: true %>
-
-  <%= f.label :image %>
-  <%= f.file_field :image %>
-  <div><%= f.submit "作成する" %></div>
-<% end %>
-<div>
-  <h4>現在の料理一覧</h4>
-  <table>
-    <tr>
-      <th>id</th>
-      <th>カテゴリ名</th>
-    </tr>
-    <% @dishes.each do |dish| %>
-      <tr>
-        <td><%= dish.id %></td>
-        <td><%= dish.name %></td>
-      </tr>
-    <% end %>
-  </table>
 </div>
