@@ -15,6 +15,7 @@ class DishesController < ApplicationController
   end
 
   private
+
   def dish_params
     params.require(:dish).permit(:name, :flavor_text, :image)
   end

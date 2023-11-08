@@ -23,6 +23,7 @@ class IngredientsController < ApplicationController
   end
 
   private
+
   def ingredient_params
     params.require(:ingredient).permit(:name, :flavor_text, :cooking_effect, :category_id, :image)
   end

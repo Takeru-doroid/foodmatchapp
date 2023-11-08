@@ -15,6 +15,7 @@ class CategoryDishesController < ApplicationController
   end
 
   private
+
   def category_dish_params
     params.require(:category_dish).permit(:category_id, :dish_id)
   end
