@@ -4,21 +4,23 @@ RSpec.describe Dish, type: :model do
   describe "Dishモデル" do
     let(:dish) { create(:dish) }
 
-    context "料理の登録ができる場合" do
-      it "料理情報に問題ない時、有効なこと" do
+    context "Dishの登録ができる場合" do
+      it "料理情報に問題がないこと" do
         expect(dish).to be_valid
       end
     end
 
-    context "料理の登録ができない場合" do
-      it "nameが空の時、無効なこと" do
+    context "Dishの登録ができない場合" do
+      it "nameが空であれば登録できないこと" do
         dish.name = ""
-        expect(dish).to be_invalid
+        dish.valid?
+        expect(dish.errors.full_messages).to include "料理名を入力してください"
       end
 
-      it "flavor_textが空の時、無効なこと" do
+      it "flavor_textが空であれば登録できないこと" do
         dish.flavor_text = ""
-        expect(dish).to be_invalid
+        dish.valid?
+        expect(dish.errors.full_messages).to include "料理の説明テキストを入力してください"
       end
     end
   end

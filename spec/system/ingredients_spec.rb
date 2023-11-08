@@ -43,5 +43,27 @@ RSpec.describe Ingredient, type: :system do
         expect(page).to have_content "#{ingredient.flavor_text}"
       end
     end
+
+    describe "newページ" do
+      before do
+        visit new_ingredient_path
+      end
+
+      it "現状登録されている食材IDが表示されていること" do
+        expect(page).to have_content "#{ingredient.id}"
+      end
+
+      it "現状登録されている食材が表示されていること" do
+        expect(page).to have_content "#{ingredient.name}"
+      end
+
+      it "食材名・テキストを入力、紐付けカテゴリを選択すれば、食材が登録できること" do
+        fill_in "ingredient_name", with: "サンプル"
+        fill_in "ingredient_flavor_text", with: "サンプルです"
+        select "キノコ類", from: "ingredient_category_id"
+        click_on "作成する"
+        expect(page).to have_content "サンプル"
+      end
+    end
   end
 end

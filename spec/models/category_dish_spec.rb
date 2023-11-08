@@ -4,18 +4,24 @@ RSpec.describe CategoryDish, type: :model do
   describe "CategoryDishモデル" do
     let(:category_dish) { create(:category_dish) }
 
-    it "CategoryDishの情報に問題ない時、有効なこと" do
-      expect(category_dish).to be_valid
+    context "CategoryDishの登録ができる場合" do
+      it "CategoryDishに問題がないこと" do
+        expect(category_dish).to be_valid
+      end
     end
 
-    it "category_idがnilの時、無効なこと" do
-      category_dish.category_id = nil
-      expect(category_dish).to be_invalid
-    end
+    context "CategoryDishの登録ができない場合" do
+      it "category_idが空であれば登録できないこと" do
+        category_dish.category_id = ""
+        category_dish.valid?
+        expect(category_dish.errors.full_messages).to include "紐付けるカテゴリを選択してください"
+      end
 
-    it "dish_idがnilの時、無効なこと" do
-      category_dish.dish_id = nil
-      expect(category_dish).to be_invalid
+      it "dish_idが空であれば登録できないこと" do
+        category_dish.dish_id = ""
+        category_dish.valid?
+        expect(category_dish.errors.full_messages).to include "紐付ける料理を選択してください"
+      end
     end
   end
 end

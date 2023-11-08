@@ -2,29 +2,32 @@ require 'rails_helper'
 
 RSpec.describe Ingredient, type: :model do
   describe "Ingredientモデル" do
-    let(:category) { create(:category) }
-    let(:ingredient) { create(:ingredient, category: category) }
+    let!(:category) { create(:category) }
+    let!(:ingredient) { create(:ingredient, category: category) }
 
-    context "食材の登録ができる場合" do
-      it "食材情報に問題ない時、有効なこと" do
+    context "Ingredientの登録ができる場合" do
+      it "食材情報に問題がないこと" do
         expect(ingredient).to be_valid
       end
     end
 
-    context "食材の登録ができない場合" do
-      it "nameが空の時、無効なこと" do
+    context "Ingredientの登録ができない場合" do
+      it "nameが空であれば登録できないこと" do
         ingredient.name = ""
-        expect(ingredient).to be_invalid
+        ingredient.valid?
+        expect(ingredient.errors.full_messages).to include "食材名を入力してください"
       end
 
-      it "flavor_textが空の時、無効なこと" do
+      it "flavor_textが空であれば登録できないこと" do
         ingredient.flavor_text = ""
-        expect(ingredient).to be_invalid
+        ingredient.valid?
+        expect(ingredient.errors.full_messages).to include "食材の説明テキストを入力してください"
       end
 
-      it "category_idがnilの時、無効なこと" do
-        ingredient.category_id = nil
-        expect(ingredient).to be_invalid
+      it "category_idが空であれば登録できないこと" do
+        ingredient.category_id = ""
+        ingredient.valid?
+        expect(ingredient.errors.full_messages).to include "紐付けるカテゴリを選択してください"
       end
     end
   end
