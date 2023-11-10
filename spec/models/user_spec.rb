@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   describe "Userモデル" do
     let(:user) { create(:user) }
     let(:another_user) { create(:user) }
+    let(:admin_user) { create(:user, role: 1) }
 
     context "新規登録ができる場合" do
       it "新規ユーザーの情報に問題がないこと" do
@@ -68,6 +69,14 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors.full_messages).to include "パスワード（確認用）とパスワードの入力が一致しません"
       end
+    end
+
+    it "userは管理者権限を持たないこと" do
+      expect(user.admin?).to eq false
+    end
+
+    it "adminは管理者権限を持つこと" do
+      expect(admin_user.admin?).to eq true
     end
   end
 end
