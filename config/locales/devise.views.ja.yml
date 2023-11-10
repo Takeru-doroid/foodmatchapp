@@ -26,6 +26,21 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
         name: ユーザー名
+      category:
+        name: カテゴリ名
+      ingredient:
+        name: 食材名
+        category_id: 紐付けるカテゴリ
+        flavor_text: 食材の説明テキスト
+        cooking_effect: 料理時効果
+        image: 食材画像
+      dish:
+        name: 料理名
+        flavor_text: 料理の説明テキスト
+        image: 料理画像
+      category_dish:
+        category_id: 紐付けるカテゴリ
+        dish_id: 紐付ける料理
     models:
       user: ユーザー
   users:

@@ -19,6 +19,8 @@ class User < ApplicationRecord
                               errors_blank?(:password)
                             }
 
+  enum role: { general: 0, admin: 1 }
+
   def errors_blank?(attribute)
     errors[attribute].blank?
   end

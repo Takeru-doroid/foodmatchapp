@@ -1,27 +1,36 @@
-<div class="px-3 py-2 bg-dark text-white">
-  <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <%= link_to root_path, class: "d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none" do %>
-      <dir style="height: 34px">
-        <span class="bi me-2">
-          <i class="fa-solid fa-house fa-2xl"></i>
-        </span>
-      </dir>
+<nav class="navbar navbar-expand-md bg-displaydish">
+  <div class="container py-1 px-4">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <i class="fa-solid fa-house fa-xl"></i>
     <% end %>
-        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-          <li>
-            <%= link_to user_path(current_user), class: "nav-link" do %>
-              <% if current_user.avatar.attached? %>
-                <%= image_tag current_user.avatar.variant(resize_to_limit: [50, 50]), class: "rounded-circle", alt: "ユーザーのアバター画像" if current_user.avatar.present? %>
-              <% else%>
-                <%= image_tag "default_image_user.jpg", size: "50x50", class: "rounded-circle", alt: "デフォルトのアバター画像" %>
-              <% end %>
-            <% end %>
-          </li>
-        </ul>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item pe-sm-3">
+          <%= link_to selections_display_selection_path, class: "nav-link" do %>
+            <i class="fa-solid fa-utensils fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">組み合わせ</div>
+          <% end %>
+        </li>
+        <li class="nav-item pe-sm-3">
+          <%= link_to ingredients_path, class: "nav-link" do %>
+            <i class="fa-solid fa-carrot fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">食材一覧</div>
+          <% end %>
+        </li>
+      </ul>
+      <%= link_to user_path(current_user), class: "nav-link d-flex justify-content-center" do %>
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar.variant(resize_to_limit: [50, 50]), class: "rounded-circle", alt: "ユーザーのアバター画像" if current_user.avatar.present? %>
+        <% else %>
+          <%= image_tag "default_image_user.jpg", size: "50x50", class: "rounded-circle", alt: "デフォルトのアバター画像" %>
+        <% end %>
+      <% end %>
     </div>
   </div>
-</div>
+</nav>
 <div class="px-3 py-2 border-bottom mb-3">
   <div class="container d-flex flex-wrap justify-content-end">
     <div class="nav">

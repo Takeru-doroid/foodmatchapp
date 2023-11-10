@@ -1,0 +1,103 @@
+<div class="row d-flex justify-content-end">
+  <% if display_dish.present? %>
+    <div class="col-lg-8 col row p-3 m-3 border rounded shadow-sm bg-displaydish">
+      <% if display_dish.image.attached? %>
+        <div class="col-lg-auto d-flex justify-content-center">
+          <button class="btn border rounded" data-bs-toggle="modal" data-bs-target="#Modal-<%= display_dish.name %>">
+            <%= image_tag display_dish.image.variant(resize_to_limit: [135, 165]), alt: "#{display_dish.name}の画像" if display_dish.image.present? %>
+          </button>
+        </div>
+      <% end %>
+      <div class="col-lg d-flex flex-column ps-3">
+        <div class="row mt-1 mt-md-3 pt-1 pt-md-3">
+          <div class="col-auto">
+            <h5 class="display-dish-icon">
+              <% if have_effect_ingredient.present? %>
+                <%= add_dish_name[have_effect_ingredient.cooking_effect] + display_dish.name %>
+              <% else %>
+                <%= display_dish.name %>
+              <% end %>
+            </h5>
+            <% if have_effect_ingredient.present? %>
+              <div class="mt-3 ps-1 text-body-secondary cooking-effect-icon">
+                <%= have_effect_ingredient.cooking_effect %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% if select_ingredients.present? %>
+        <div class="col-lg select-ingredients row px-3 d-flex justify-content-center flex-column">
+          <div class="col-lg d-flex justify-content-center">
+            <h6 class="ingredient-icon">選んだ食材</h6>
+          </div>
+          <% select_ingredients.each_with_index do |ingredient, i| %>
+            <% if i != select_ingredients.length - 1 %>
+              <div class="col-lg d-flex align-items-center border rounded shadow-sm bg-ingredient">
+                <%= link_to ingredient_path(ingredient.id), class: "link-with-icon" do %>
+                  <%= ingredient.name %>
+                  <i class="fa-solid fa-chevron-right"></i>
+                <% end %>
+              </div>
+              <div class="col-auto d-flex justify-content-center">+</div>
+            <% else %>
+              <div class="col-lg d-flex align-items-center border rounded shadow-sm bg-ingredient">
+                <%= link_to ingredient_path(ingredient.id), class: "link-with-icon" do %>
+                  <%= ingredient.name %>
+                  <i class="fa-solid fa-chevron-right"></i>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="modal fade" id="Modal-<%= display_dish.name %>" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title">詳細</h6>
+            <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="display-dish-icon">
+                  <% if have_effect_ingredient.present? %>
+                    <%= add_dish_name[have_effect_ingredient.cooking_effect] + display_dish.name %>
+                  <% else %>
+                    <%= display_dish.name %>
+                  <% end %>
+                </h5>
+                <% if have_effect_ingredient.present? %>
+                  <div class="card-subtitle ps-1 text-body-secondary cooking-effect-icon">
+                    <%= have_effect_ingredient.cooking_effect %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="card-body">
+                <div class="card-text">
+                  <%= display_dish.flavor_text %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="col-md-3 d-lg-block d-none m-3 p-3 border rounded shadow-sm bg-displaydish">
+    <div>
+      <i class="fa-solid fa-lightbulb fa-xl pe-2"></i>
+      遊び方
+    </div>
+    <ol class="mt-3">
+      <li class="py-1">好きな食材を"選択"する</li>
+      <li class="py-1">"料理する"を押して、料理をつくる</li>
+      <p class="pt-3 text-danger">
+        <i class="fa-solid fa-circle-exclamation pe-2"></i>
+        選択できるのは、3つまで
+      </p>
+    </ol>
+  </div>
+</div>

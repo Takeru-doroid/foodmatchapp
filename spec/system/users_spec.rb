@@ -68,6 +68,20 @@ RSpec.describe User, type: :system do
     describe "ログイン後" do
       before { login(user) }
 
+      it "組み合わせのリンク先がselections_display_selection_pathになること" do
+        within ".navbar-nav" do
+          click_on "組み合わせ"
+        end
+        expect(current_path).to eq selections_display_selection_path
+      end
+
+      it "食材一覧のリンク先がingredients_pathになること" do
+        within ".navbar-nav" do
+          click_on "食材一覧"
+        end
+        expect(current_path).to eq ingredients_path
+      end
+
       it "デフォルトのアバター画像が表示されていること" do
         expect(page).to have_selector "img[alt='デフォルトのアバター画像']"
       end
