@@ -1,4 +1,6 @@
 class IngredientsController < ApplicationController
+  before_action :check_admin, except: [:index, :show]
+
   def index
     @category_ingredients = Category.all.includes(ingredients: { image_attachment: :blob })
   end
@@ -26,5 +28,11 @@ class IngredientsController < ApplicationController
 
   def ingredient_params
     params.require(:ingredient).permit(:name, :flavor_text, :cooking_effect, :category_id, :image)
+  end
+
+  def check_admin
+    unless current_user&.admin?
+      redirect_to root_path, alert: "権限がありません"
+    end
   end
 end

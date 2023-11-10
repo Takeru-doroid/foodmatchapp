@@ -1,4 +1,6 @@
 class CategoryDishesController < ApplicationController
+  before_action :check_admin
+
   def new
     @category_dish = CategoryDish.new
     @category_dishes = CategoryDish.all
@@ -18,5 +20,11 @@ class CategoryDishesController < ApplicationController
 
   def category_dish_params
     params.require(:category_dish).permit(:category_id, :dish_id)
+  end
+
+  def check_admin
+    unless current_user&.admin?
+      redirect_to root_path, alert: "権限がありません"
+    end
   end
 end

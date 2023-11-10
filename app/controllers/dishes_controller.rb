@@ -1,4 +1,6 @@
 class DishesController < ApplicationController
+  before_action :check_admin
+
   def new
     @dish = Dish.new
     @dishes = Dish.all
@@ -18,5 +20,11 @@ class DishesController < ApplicationController
 
   def dish_params
     params.require(:dish).permit(:name, :flavor_text, :image)
+  end
+
+  def check_admin
+    unless current_user&.admin?
+      redirect_to root_path, alert: "権限がありません"
+    end
   end
 end

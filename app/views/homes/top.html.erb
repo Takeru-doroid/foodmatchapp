@@ -3,6 +3,8 @@
 <% if user_signed_in? %>
   <p><%= link_to "selectionsコントローラー(食材選び)", selections_display_selection_path %></p>
   <p><%= link_to "食材一覧", ingredients_path %></p>
+<% end %>
+<% if user_signed_in? && current_user.admin? %>
   <p><%= link_to "カテゴリ作成", new_category_path %></p>
   <p><%= link_to "食材作成", new_ingredient_path %></p>
   <p><%= link_to "料理作成", new_dish_path %></p>
