@@ -41,6 +41,11 @@ ja:
       category_dish:
         category_id: 紐付けるカテゴリ
         dish_id: 紐付ける料理
+      post:
+        title: "タイトル"
+        body: "投稿する内容"
+        user_id: "ユーザー"
+        dish_id: "料理"
     models:
       user: ユーザー
   users:
