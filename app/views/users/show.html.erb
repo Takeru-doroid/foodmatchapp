@@ -1,5 +1,33 @@
 <div class="container">
-  <h1>Users#show</h1>
-  <p><%= current_user.name %></p>
-  <p><%= link_to "ユーザー情報変更", edit_user_registration_path %></p>
+  <div>
+    <%= current_user.name %>
+  </div>
+  <div>
+    <%= link_to "ユーザー情報変更", edit_user_registration_path %>
+  </div>
+  <div>
+    <h4>投稿一覧</h4>
+    <% @posts.each do |post| %>
+      <div class="bg-ingredient border rounded">
+        <div>
+          タイトル：<%= post.title %>
+        </div>
+        <div>
+          投稿内容：<%= post.body %>
+        </div>
+        <div>
+          <%= post.created_at.to_s(:datetime_jp) %>
+        </div>
+        <div>
+          <%= post.dish.name %>
+        </div>
+        <div>
+          <% if post.dish.image.attached? %>
+            <%= image_tag post.dish.image.variant(resize_to_limit: [60, 60]), alt: "#{post.dish.name}の画像" if post.dish.image.present? %>
+          <% end %>
+          <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish.id) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
