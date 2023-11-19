@@ -1,0 +1,22 @@
+<div class="container">
+  <%= render "layouts/shared/error_messages", model: @post %>
+  <%= form_with model: @post, local: true do |f| %>
+    <div>
+      <%= f.hidden_field :dish_id, value: @post.dish_id %>
+    </div>
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+    </div>
+    <div>
+      <%= f.submit "編集する" %>
+    </div>
+  <% end %>
+  <div>
+    <%= link_to "投稿を削除する", post_path(@post.id, dish_id: @post.dish_id), data: { turbo_method: :delete, turbo_confirm: "投稿を削除しますか?" } %>
+  </div>
+</div>

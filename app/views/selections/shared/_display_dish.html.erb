@@ -23,6 +23,9 @@
                 <%= have_effect_ingredient.cooking_effect %>
               </div>
             <% end %>
+            <div>
+              <%= link_to "投稿する", new_post_path(dish_id: display_dish.id) %>
+            </div>
           </div>
         </div>
       </div>

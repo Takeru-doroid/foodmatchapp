@@ -1,0 +1,27 @@
+<div class="container">
+  <% @posts.each do |post| %>
+    <div class="bg-ingredient border rounded">
+      <div>
+        タイトル：<%= post.title %>
+      </div>
+      <div>
+        投稿内容：<%= post.body %>
+      </div>
+      <div><%= post.created_at.to_s(:datetime_jp) %></div>
+      <div>
+        <%= post.user.name %>
+      </div>
+      <div>
+        <%= post.dish.name %>
+      </div>
+      <div>
+        <% if post.dish.image.attached? %>
+          <%= image_tag post.dish.image.variant(resize_to_limit: [60, 60]), alt: "#{post.dish.name}の画像" if post.dish.image.present? %>
+        <% end %>
+        <% if current_user.id == post.user.id %>
+          <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish_id) %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
