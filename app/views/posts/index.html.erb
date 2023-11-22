@@ -1,13 +1,13 @@
-<div class="container">
-  <% @posts.each do |post| %>
-    <div class="bg-ingredient border rounded">
+<div class="container posts-container">
+  <% @posts.each_with_index do |post, i| %>
+    <div class="bg-ingredient border rounded post-<%= i %>">
       <div>
         タイトル：<%= post.title %>
       </div>
       <div>
         投稿内容：<%= post.body %>
       </div>
-      <div><%= post.created_at.to_s(:datetime_jp) %></div>
+      <div><%= post.created_at.to_formatted_s(:datetime_jp) %></div>
       <div>
         <%= post.user.name %>
       </div>
