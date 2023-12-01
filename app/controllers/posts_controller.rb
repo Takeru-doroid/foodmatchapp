@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:user, :dish).all
+    @posts = Post.includes(:user, dish: { image_attachment: :blob }).all
   end
 
   def new
