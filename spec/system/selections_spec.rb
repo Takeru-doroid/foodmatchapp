@@ -124,7 +124,7 @@ RSpec.describe "Selections", type: :system do
 
       it "投稿するが投稿ページへのリンクになっていること" do
         select_ingredient([0])
-        click_on "投稿する"
+        click_on "投稿"
         expect(current_path).to eq new_post_path
       end
 

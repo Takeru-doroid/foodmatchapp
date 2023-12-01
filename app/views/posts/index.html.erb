@@ -1,27 +1,53 @@
-<div class="container posts-container">
+<div class="container posts-container p-4">
   <% @posts.each_with_index do |post, i| %>
-    <div class="bg-ingredient border rounded post-<%= i %>">
-      <div>
-        タイトル：<%= post.title %>
+    <div class="post-<%= i %> bg-ingredient border shadow-sm rounded p-3 mb-3" style="min-height: 194px;">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="row pb-3">
+            <div class="col-auto">
+              <% if post.user.avatar.attached? %>
+                <%= image_tag post.user.avatar.variant(resize_to_limit: [40, 40]), class: "rounded-circle", alt: "#{post.user.name}のアバター画像" if post.user.avatar.attached? %>
+              <% else %>
+                <%= image_tag "default_image_user.jpg", size: "40x40", class: "rounded-circle", alt: "デフォルトのアバター画像" %>
+              <% end %>
+            </div>
+            <div class="col row-cols-1">
+              <div class="col">
+                <%= post.user.name %>
+              </div>
+              <sub class="col text-body-secondary">
+                <%= post.created_at.to_formatted_s(:datetime_jp) %>
+              </sub>
+            </div>
+          </div>
+          <h5 class="fw-bold">
+            <%= post.title %>
+          </h5>
+          <%= post.body %>
+        </div>
+        <div class="col-sm-4">
+          <div class="border rounded py-1 post-dish">
+            <% if post.dish.image.attached? %>
+              <div class="d-flex justify-content-center pb-2">
+                <%= image_tag post.dish.image.variant(resize_to_limit: [160, 96]), alt: "#{post.dish.name}の画像" if post.dish.image.present? %>
+              </div>
+            <% end %>
+            <small class="d-flex justify-content-center">
+              <%= post.dish.name %>
+            </small>
+          </div>
+        </div>
       </div>
-      <div>
-        投稿内容：<%= post.body %>
-      </div>
-      <div><%= post.created_at.to_formatted_s(:datetime_jp) %></div>
-      <div>
-        <%= post.user.name %>
-      </div>
-      <div>
-        <%= post.dish.name %>
-      </div>
-      <div>
-        <% if post.dish.image.attached? %>
-          <%= image_tag post.dish.image.variant(resize_to_limit: [60, 60]), alt: "#{post.dish.name}の画像" if post.dish.image.present? %>
-        <% end %>
+      <div class="py-2 text-end">
         <% if current_user.id == post.user.id %>
-          <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish_id) %>
+          <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish_id), class: "edit-icon" %>
         <% end %>
       </div>
     </div>
   <% end %>
+  <div class="back-top-btn">
+    <%= link_to "#" do %>
+      <i class="fa-solid fa-circle-up fa-2xl" style="color: rgb(55, 36, 220);"></i>
+    <% end %>
+  </div>
 </div>
