@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :ingredients, only: [:index, :show, :new, :create]
   resources :dishes, only: [:new, :create]
   resources :category_dishes, only: [:new, :create]
-  resources :posts, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :posts, only: [:index, :new, :create, :edit, :update, :destroy] do
+    resource :favorites, only: [:create, :destroy]
+  end
   get 'selections/display_selection', to: 'selections#display_selection'
   post 'selections/calculate_dishes', to: 'selections#calculate_dishes'
 end
