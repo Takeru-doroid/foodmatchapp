@@ -38,10 +38,25 @@
           </div>
         </div>
       </div>
-      <div class="py-2 text-end">
-        <% if current_user.id == post.user.id %>
-          <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish_id), class: "edit-icon" %>
-        <% end %>
+      <div class="row">
+        <div class="col-auto py-2">
+          <% if post.favorited_by?(current_user) %>
+            <%= link_to post_favorites_path(post.id), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
+              <i class="fa-solid fa-heart" style="color: rgb(232, 36, 88);"></i>
+              <%= post.favorites.count %>いいね
+            <% end %>
+          <% else %>
+            <%= link_to post_favorites_path(post.id), data: { turbo_method: :post }, class: "text-decoration-none" do %>
+              <i class="fa-regular fa-heart" style="color: rgb(232, 36, 88);"></i>
+              <%= post.favorites.count %>いいね
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col py-2 text-end">
+          <% if current_user.id == post.user.id %>
+            <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish_id), class: "edit-icon" %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
