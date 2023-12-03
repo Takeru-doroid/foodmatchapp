@@ -131,6 +131,15 @@ RSpec.describe User, type: :system do
           end
         end
 
+        it "投稿にいいねのON/OFFができること" do
+          within ".my-post-0" do
+            click_on "いいね"
+            expect(Favorite.count).to eq 1
+            click_on "いいね"
+            expect(Favorite.count).to eq 0
+          end
+        end
+
         it "編集するが投稿編集ページへのリンクになっていること" do
           within ".my-posts-container" do
             within ".my-post-0" do

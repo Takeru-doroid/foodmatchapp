@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :system do
-  describe "Post" do
+  describe "posts" do
     let(:user) { create(:user) }
     let!(:guest_user) { create(:user, name: "ゲストユーザー", email: "guest@example.com") }
     let!(:dish) { create(:dish) }
@@ -37,6 +37,15 @@ RSpec.describe Post, type: :system do
             expect(page).to have_content "#{post.dish.name}"
             expect(page).to have_selector "img[alt=#{post.dish.name}の画像]"
           end
+        end
+      end
+
+      it "投稿にいいねのON/OFFができること" do
+        within ".post-0" do
+          click_on "いいね"
+          expect(Favorite.count).to eq 1
+          click_on "いいね"
+          expect(Favorite.count).to eq 0
         end
       end
 
