@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_09_131959) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_02_050436) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -61,6 +61,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_131959) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "favorites", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_favorites_on_post_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "ingredients", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "flavor_text", null: false
@@ -69,6 +78,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_131959) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_ingredients_on_category_id"
+  end
+
+  create_table "posts", charset: "utf8mb4", force: :cascade do |t|
+    t.string "title", default: "", null: false
+    t.text "body", null: false
+    t.bigint "user_id", null: false
+    t.bigint "dish_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dish_id"], name: "index_posts_on_dish_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -89,5 +109,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_131959) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "category_dishes", "categories"
   add_foreign_key "category_dishes", "dishes"
+  add_foreign_key "favorites", "posts"
+  add_foreign_key "favorites", "users"
   add_foreign_key "ingredients", "categories"
+  add_foreign_key "posts", "dishes"
+  add_foreign_key "posts", "users"
 end

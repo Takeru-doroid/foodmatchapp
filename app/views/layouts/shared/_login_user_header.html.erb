@@ -9,6 +9,12 @@
     <div class="navbar-collapse collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item pe-sm-3">
+          <%= link_to posts_path, class: "nav-link" do %>
+            <i class="fa-solid fa-comments fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">投稿一覧</div>
+          <% end %>
+        </li>
+        <li class="nav-item pe-sm-3">
           <%= link_to selections_display_selection_path, class: "nav-link" do %>
             <i class="fa-solid fa-utensils fa-2xl pt-3 d-flex justify-content-center"></i>
             <div class="d-flex justify-content-center pt-3">組み合わせ</div>

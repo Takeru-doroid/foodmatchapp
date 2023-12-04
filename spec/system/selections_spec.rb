@@ -122,6 +122,12 @@ RSpec.describe "Selections", type: :system do
         expect(page).to have_content "少なくとも1つ以上は食材を選択してください"
       end
 
+      it "投稿するが投稿ページへのリンクになっていること" do
+        select_ingredient([0])
+        click_on "投稿"
+        expect(current_path).to eq new_post_path
+      end
+
       describe "組み合わせ挙動" do
         context "選択数が1つの場合" do
           it "キノコ類の食材であれば、串焼きキノコが表示されること" do

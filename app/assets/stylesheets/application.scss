@@ -14,6 +14,31 @@
   // Custom bootstrap variables must be set or imported *before* bootstrap.
   @import "bootstrap";
 
+  @media (max-width: 767px) {
+    .post-dish img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .post-dish img {
+      max-width: 80px;
+      max-height: 80px;
+    }
+
+    .post-dish small {
+      font-size: 0.75em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .post-dish img {
+      max-width: 60px;
+      max-height: 60px;
+    }
+  }
+
   :root {
     --bg-beige: rgba(245, 245, 220, 1);
     --bg-turquoise: rgba(64, 224, 208, 1);
@@ -106,6 +131,26 @@
     font-weight: 900;
   }
 
+  .posting-icon:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f1d8";
+    padding-right: 0.5rem;
+    font-weight: 400;
+  }
+
+  .edit-icon:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f5a1";
+    font-weight: 900;
+  }
+
+  .delete-icon:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f2ed";
+    font-weight: 400;
+    padding-right: 0.5rem;
+  }
+
   .bg-displaydish {
     background-color: var(--bg-beige);
   }
@@ -150,4 +195,17 @@
 
   .link-with-icon:hover i {
     padding-left: 0.5rem;
+  }
+
+  .posts-container, .my-posts-container {
+    width: 100%;
+    max-width: 700px;
+    padding: 30px;
+    margin: auto;
+  }
+
+  .back-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
   }

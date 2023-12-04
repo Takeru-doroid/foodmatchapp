@@ -1,5 +1,56 @@
 <div class="container">
-  <h1>Users#show</h1>
-  <p><%= current_user.name %></p>
-  <p><%= link_to "ユーザー情報変更", edit_user_registration_path %></p>
+  <div>
+    <%= current_user.name %>
+  </div>
+  <div>
+    <%= link_to "ユーザー情報変更", edit_user_registration_path %>
+  </div>
+  <div class="my-posts-container">
+    <h4>投稿一覧</h4>
+    <% @posts.each_with_index do |post, i| %>
+      <div class="bg-ingredient border shadow-sm rounded p-3 mb-3 my-post-<%= i %>" style="min-height: 194px;">
+        <div class="row">
+          <div class="col-sm-8">
+            <sub class="text-body-secondary">
+              <%= post.created_at.to_formatted_s(:datetime_jp) %>
+            </sub>
+            <h5 class="fw-bold">
+              <%= post.title %>
+            </h5>
+            <%= post.body %>
+          </div>
+          <div class="col-sm-4">
+            <div class="border rounded py-1 post-dish">
+              <% if  post.dish.image.attached? %>
+                <div class="d-flex justify-content-center pb-2">
+                  <%= image_tag post.dish.image.variant(resize_to_limit: [160, 96]), alt: "#{post.dish.name}の画像" if post.dish.image.present? %>
+                </div>
+              <% end %>
+              <small class="d-flex justify-content-center">
+                <%= post.dish.name %>
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-auto">
+            <% if post.favorited_by?(current_user) %>
+              <%= link_to post_favorites_path(post.id), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
+                <i class="fa-solid fa-heart" style="color: rgb(232, 36, 88);"></i>
+                <%= post.favorites.count %>いいね
+              <% end %>
+            <% else %>
+              <%= link_to post_favorites_path(post.id), data: { turbo_method: :post }, class: "text-decoration-none" do %>
+                <i class="fa-regular fa-heart" style="color: rgb(232, 36, 88);"></i>
+                <%= post.favorites.count %>いいね
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col py-2 text-end">
+            <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish.id), class: "edit-icon" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
