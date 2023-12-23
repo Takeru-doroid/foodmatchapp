@@ -14,6 +14,16 @@
   // Custom bootstrap variables must be set or imported *before* bootstrap.
   @import "bootstrap";
 
+  @media (max-width: 992px) {
+    .top-selections-container .sentence-3 {
+      display: none;
+    }
+
+    .top-selections-container small {
+      font-size: 0.80rem;
+    }
+  }
+
   @media (max-width: 767px) {
     .post-dish img {
       max-width: 100px;
@@ -39,6 +49,12 @@
     }
   }
 
+  @media (max-width: 425px) {
+    .footer-contents {
+      font-size: 0.65rem;
+    }
+  }
+
   :root {
     --bg-beige: rgba(245, 245, 220, 1);
     --bg-turquoise: rgba(64, 224, 208, 1);
@@ -61,48 +77,13 @@
 
   .form-edit {
     width: 100%;
-    max-width: 500px;
-    padding: 30px;
+    max-width: 550px;
+    padding: 30px 10px;
     margin: auto;
   }
 
-  .fade-in {
-    animation-name: fadeInAnime;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeInAnime{
-    from {
-      opacity: 0;
-      transform: translateY(-100px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .fade-out {
-    animation-name: fadeOutAnime;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
-    opacity: 1;
-  }
-
-  @keyframes fadeOutAnime{
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    to {
-      opacity: 0;
-      transform: translateY(-100px);
-      display: none;
-    }
+  #flash-message {
+    min-width: 50%;
   }
 
   .field_with_errors {
@@ -157,6 +138,7 @@
 
   .cooking-input-btn {
     font-size: large;
+    color: black;
     letter-spacing: 1rem;
     padding: 0.5rem 4rem;
     background-color: var(--bg-beige);
@@ -191,10 +173,6 @@
 
   .btn-check:disabled + .ingredient-check-label {
     opacity: 0.5;
-  } 
-
-  .link-with-icon:hover i {
-    padding-left: 0.5rem;
   }
 
   .posts-container, .my-posts-container {
@@ -208,4 +186,97 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
+  }
+
+  .rectangles {
+    background-image: repeating-linear-gradient(45deg, var(--bg-beige) 25%, transparent 25%, transparent 75%, var(--bg-beige) 75%, var(--bg-beige)), repeating-linear-gradient(45deg, var(--bg-beige) 25%, var(--bg-ivory) 25%, var(--bg-ivory) 75%, var(--bg-beige) 75%, var(--bg-beige));
+    background-position: 0 0, 20px 20px;
+    background-size: 40px 40px;
+  }
+
+  .top-admin-container a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    color: black;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+    transition-duration: 0.2s;
+  }
+
+  .top-admin-container a:hover, .top-admin-container a:active {
+    transform: scale(0.8);
+  }
+
+  .top-selections-container img {
+    border: 10px solid black;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    opacity: 0.8;
+    object-fit: cover;
+    transition-duration: 0.2s;
+  }
+
+  .top-selections-container img:hover, .top-selections-container img:active {
+    transform: scale(1.1);
+  }
+
+  #stretched-link-content {
+    transition-duration: 0.2s;
+  }
+
+  #stretched-link:hover {
+    #stretched-link-content {
+      transform: scale(1.1);
+    }
+  }
+
+  .link-of-ingredient {
+    text-decoration: none;
+    position: relative;
+    transition-duration: 0.2s;
+  }
+
+  .link-of-ingredient:hover {
+    right: 3px;
+    bottom: 3px;
+  }
+
+  .link-with-icon {
+    text-decoration: none;
+    .fa-chevron-right {
+      transition-duration: 0.3s;
+    }
+  }
+
+  .link-with-icon:hover {
+    .fa-chevron-right {
+      padding-left: 1.5rem;
+    }
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    transition-duration: 0.3s;
+  }
+
+  .carousel-control-prev:hover, .carousel-control-next:hover {
+    transform: scale(1.3);
+  }
+
+  #navbarLogoutUserContent .nav-link:hover,
+  #navbarLoginUserContent .nav-link:hover {
+    transform: scale(1.1);
+  }
+
+  .nav-link {
+    color: black;
+  }
+
+  .nav-tabs {
+    --bs-nav-tabs-border-color: var(--bg-beige);
+    --bs-nav-tabs-link-hover-border-color: var(--bg-beige);
+    --bs-nav-tabs-link-active-bg: var(--bg-beige);
   }

@@ -28,13 +28,6 @@ document.addEventListener("click", ({target}) => {
       target.classList.toggle("fa-eye-slash", !flg_3);
     }
   }
-  if (target.matches(".close")) {
-    const alertMsg = document.getElementById("flash-message");
-    alertMsg.classList.add("fade-out");
-    alertMsg.addEventListener("animationend", () => {
-      alertMsg.remove();
-    });
-  }
 });
 
 document.addEventListener("change", ({target}) => {

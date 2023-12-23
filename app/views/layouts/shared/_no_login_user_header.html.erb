@@ -1,16 +1,32 @@
-<nav class="navbar navbar-expand-lg bg-displaydish">
+<nav class="navbar navbar-expand-md rectangles">
   <div class="container py-1 px-4">
     <%= link_to root_path, class: "navbar-brand" do %>
       <i class="fa-solid fa-house fa-xl"></i>
     <% end %>
-  </div>
-</nav>
-<div class="px-3 py-2 border-bottom mb-3">
-  <div class="container d-flex flex-wrap justify-content-end">
-    <div class="nav">
-        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-primary me-2" %>
-        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-secondary me-2" %>
-        <%= button_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "btn btn-outline-info" %>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLogoutUserContent" aria-controls="navbarLogoutUserContent" aria-hidden="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarLogoutUserContent">
+      <div class="ms-auto row d-flex justify-content-center">
+        <div class="nav-item col-auto pe-sm-3 my-2 my-sm-none">
+          <%= link_to new_user_session_path, class: "nav-link" do %>
+            <i class="fa-solid fa-right-to-bracket fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">ログイン</div>
+          <% end %>
+        </div>
+        <div class="nav-item col-auto pe-sm-3 my-2 my-sm-none">
+          <%= link_to new_user_registration_path, class: "nav-link" do %>
+            <i class="fa-solid fa-user-plus fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">新規登録</div>
+          <% end %>
+        </div>
+        <div class="nav-item col-auto pe-sm-3 my-2 my-sm-none">
+          <%= link_to users_guest_sign_in_path, data: { turbo_method: :post}, class: "nav-link" do %>
+            <i class="fa-solid fa-user-secret fa-2xl pt-3 d-flex justify-content-center"></i>
+            <small class="d-flex justify-content-center pt-3">ゲストログイン</small>
+          <% end %>
+        </div>
+      </ul>
     </div>
   </div>
-</div>
+</nav>
