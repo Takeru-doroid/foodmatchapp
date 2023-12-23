@@ -62,7 +62,7 @@ RSpec.describe Post, type: :system do
         within ".posts-container" do
           within ".post-0" do
             click_on "編集する"
-            expect(current_path).to eq edit_post_path(posts[0].id)
+            expect(current_path).to eq edit_post_path(posts[1].id)
           end
         end
       end
@@ -105,7 +105,9 @@ RSpec.describe Post, type: :system do
       context "editページに遷移できない場合" do
         it "別ユーザーは、投稿の編集ページにアクセスできないこと" do
           visit root_path
-          click_on "ゲストログイン"
+          within "#navbarLogoutUserContent" do
+            click_on "ゲストログイン"
+          end
           visit edit_post_path(posts[0].id)
           expect(page).to have_content "無効なアクセスです"
         end

@@ -18,23 +18,31 @@ RSpec.describe User, type: :system do
       end
 
       it "新規登録画面に遷移できること" do
-        click_on "新規登録"
+        within "#navbarLogoutUserContent" do
+          click_on "新規登録"
+        end
         expect(current_path).to eq new_user_registration_path
       end
 
       it "ログイン画面に遷移できること" do
-        click_on "ログイン"
+        within "#navbarLogoutUserContent" do
+          click_on "ログイン"
+        end
         expect(current_path).to eq new_user_session_path
       end
 
       it "ゲストログインができること" do
-        click_on "ゲストログイン"
+        within "#navbarLogoutUserContent" do
+          click_on "ゲストログイン"
+        end
         expect(current_path).to eq root_path
         expect(page).to have_content "ゲストユーザーとしてログインしました。"
       end
 
       it "ゲストユーザーは編集・更新ができないこと" do
-        click_on "ゲストログイン"
+        within "#navbarLogoutUserContent" do
+          click_on "ゲストログイン"
+        end
         visit user_path(guest_user)
         click_on "ユーザー情報変更"
         expect(page).to have_content "ゲストユーザーの更新・削除はできません。"
@@ -71,14 +79,14 @@ RSpec.describe User, type: :system do
       before { login(user) }
 
       it "組み合わせのリンク先がselections_display_selection_pathになること" do
-        within ".navbar-nav" do
+        within "#navbarLoginUserContent" do
           click_on "組み合わせ"
         end
         expect(current_path).to eq selections_display_selection_path
       end
 
       it "食材一覧のリンク先がingredients_pathになること" do
-        within ".navbar-nav" do
+        within "#navbarLoginUserContent" do
           click_on "食材一覧"
         end
         expect(current_path).to eq ingredients_path
