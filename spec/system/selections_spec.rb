@@ -11,7 +11,7 @@ RSpec.describe "Selections", type: :system do
         create(:ingredient, name: "上ケモノ肉", category: category[1]),
         create(:ingredient, name: "ムカシアロワナ", category: category[2]),
         create(:ingredient, name: "サンケゴイ", category: category[2]),
-        create(:ingredient, name: "ハイラル草", category: category[3]),
+        create(:ingredient, name: "ヨロイカボチャ", category: category[3], cooking_effect: "防御アップ"),
         create(:ingredient, name: "ガンバリ草", category: category[3], cooking_effect: "がんばり回復"),
         create(:ingredient, name: "リンゴ", category: category[4]),
         create(:ingredient, name: "イチゴ", category: category[4]),
@@ -52,6 +52,8 @@ RSpec.describe "Selections", type: :system do
         create(:category_dish, category: category[4], dish: dish[13]),
         create(:category_dish, category: category[3], dish: dish[14]),
         create(:category_dish, category: category[4], dish: dish[14]),
+        create(:category_dish, category: category[2], dish: dish[15]),
+        create(:category_dish, category: category[4], dish: dish[15]),
       ]
     end
     let!(:dish) do
@@ -71,12 +73,13 @@ RSpec.describe "Selections", type: :system do
         create(:dish, name: "煮込み果実"),
         create(:dish, name: "果実のキノコあえ"),
         create(:dish, name: "蒸し焼き果実"),
+        create(:dish, name: "肉詰めカボチャ"),
       ]
     end
 
     it "selectionページに遷移できること" do
       login(user)
-      click_on "selectionsコントローラー(食材選び)"
+      click_on "組み合わせページへのリンク画像"
       expect(current_path).to eq selections_display_selection_path
     end
 
@@ -216,7 +219,7 @@ RSpec.describe "Selections", type: :system do
             end
 
             it "肉類 ✖️ 野菜類は、包み焼き肉が表示されること" do
-              select_ingredient([2, 6])
+              select_ingredient([2, 7])
               expect(page).to have_content "#{dish[10].name}"
             end
 
@@ -244,6 +247,11 @@ RSpec.describe "Selections", type: :system do
               select_ingredient([3, 4])
               expect(page).to have_content "#{dish[6].name}"
             end
+
+            it "ヨロイカボチャ ✖️ 肉類は、肉詰めカボチャが表示されること" do
+              select_ingredient([2, 6])
+              expect(page).to have_content "#{dish[15].name}"
+            end
           end
         end
 
@@ -256,24 +264,24 @@ RSpec.describe "Selections", type: :system do
               end
             end
 
-            it "肉類食材が2つ以上であれば、串焼き肉が表示されること" do
-              (0..9).reject { |i| [2, 3].include?(i) }.each do |i|
+            it "果実類食材が2つ以上であれば、煮込み果実が表示されること" do
+              (0..9).reject { |i| [8, 9].include?(i) }.each do |i|
+                select_ingredient([i, 8, 9])
+                expect(page).to have_content "#{dish[12].name}"
+              end
+            end
+
+            it "肉類食材が2つ以上かつもう一つがヨロイカボチャでなければ、串焼き肉が表示されること" do
+              (0..9).reject { |i| [2, 3, 6].include?(i) }.each do |i|
                 select_ingredient([i, 2, 3])
                 expect(page).to have_content "#{dish[1].name}"
               end
             end
 
-            it "野菜類食材が2つ以上であれば、焼き山菜が表示されること" do
-              (0..9).reject { |i| [6, 7].include?(i) }.each do |i|
+            it "野菜類食材が2つ以上かつヨロイカボチャ ✖️ 肉類の組み合わせでなければ、焼き山菜が表示されること" do
+              (0..9).reject { |i| [2, 3, 6, 7].include?(i) }.each do |i|
                 select_ingredient([i, 6, 7])
                 expect(page).to have_content "#{dish[7].name}"
-              end
-            end
-
-            it "果実類食材が2つ以上であれば、煮込み果実が表示されること" do
-              (0..9).reject { |i| [8, 9].include?(i) }.each do |i|
-                select_ingredient([i, 8, 9])
-                expect(page).to have_content "#{dish[12].name}"
               end
             end
 
@@ -282,6 +290,18 @@ RSpec.describe "Selections", type: :system do
                 select_ingredient([i, 4, 5])
                 expect(page).to have_content "#{dish[2].name}"
               end
+            end
+
+            it "野菜類2種(ヨロイカボチャを含む) ✖️ 肉類であれば、肉詰めカボチャが表示されること" do
+              [2, 3].each do |i|
+                select_ingredient([i, 6, 7])
+                expect(page).to have_content "#{dish[15].name}"
+              end
+            end
+
+            it "肉類2種 ✖️ ヨロイカボチャであれば、肉詰めカボチャが表示されること" do
+              select_ingredient([2, 3, 6])
+              expect(page).to have_content "#{dish[15].name}"
             end
 
             it "魚類2種 ✖️ 肉類であれば、山海焼きが表示されること" do
@@ -296,23 +316,30 @@ RSpec.describe "Selections", type: :system do
           end
 
           context "全て別カテゴリの場合" do
-            it "肉類 ✖️ 魚類の食材が含まれているとき、山海焼きが優先表示されること" do
-              (0..9).reject { |i| [2, 3, 4, 5].include?(i) }.each do |i|
+            it "ヨロイカボチャ ✖️ 肉類の食材が含まれているとき、肉詰めカボチャが優先表示されること" do
+              (0..9).reject { |i| [2, 6].include?(i) }.each do |i|
+                select_ingredient([i, 2, 6])
+                expect(page).to have_content "#{dish[15].name}"
+              end
+            end
+
+            it "肉類 ✖️ 魚類の食材が含まれるかつヨロイカボチャが含まれないとき、山海焼きが優先表示されること" do
+              (0..9).reject { |i| [2, 3, 4, 5, 6].include?(i) }.each do |i|
                 select_ingredient([i, 2, 4])
                 expect(page).to have_content "#{dish[5].name}"
               end
             end
 
-            it "上ケモノ肉 ✖️ 魚類の食材が含まれているとき、上山海焼きが優先表示されること" do
-              (0..9).reject { |i| [2, 3, 4, 5].include?(i) }.each do |i|
+            it "上ケモノ肉 ✖️ 魚類の食材が含まれるかつヨロイカボチャが含まれないとき、上山海焼きが優先表示されること" do
+              (0..9).reject { |i| [2, 3, 4, 5, 6].include?(i) }.each do |i|
                 select_ingredient([i, 3, 4])
                 expect(page).to have_content "#{dish[6].name}"
               end
             end
 
-            it "肉類 ✖️ 野菜類 ✖️ (キノコ類 or 果実類)であれば、包み焼き肉が優先表示されること" do
+            it "肉類 ✖️ 野菜類(ヨロイカボチャを除く) ✖️ (キノコ類 or 果実類)であれば、包み焼き肉が優先表示されること" do
               (0..9).reject { |i| [2, 3, 4, 5, 6, 7].include?(i) }.each do |i|
-                select_ingredient([i, 2, 6])
+                select_ingredient([i, 2, 7])
                 expect(page).to have_content "#{dish[10].name}"
               end
             end
