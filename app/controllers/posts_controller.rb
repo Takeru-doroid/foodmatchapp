@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.includes(:user, :favorites, dish: { image_attachment: :blob }).order(created_at: "desc")
-    @favorite_posts = Post.includes(:user, :favorites, dish: { image_attachment: :blob }).find(Favorite.group(:post_id).order("count(post_id) desc").pluck(:post_id))
+    @favorite_posts = Post.includes(:user, :favorites, dish: { image_attachment: :blob }).
+      find(Favorite.group(:post_id).order("count(post_id) desc").pluck(:post_id))
   end
 
   def new
