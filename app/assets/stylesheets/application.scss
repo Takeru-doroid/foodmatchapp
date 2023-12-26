@@ -184,8 +184,10 @@
 
   .back-top-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    background-color: rgba(64, 224, 208, 0.8);
+    bottom: 0px;
+    right: 0px;
+    padding-top: 1rem;
   }
 
   .rectangles {
