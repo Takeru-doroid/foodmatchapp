@@ -103,7 +103,12 @@
         <%= link_to selections_display_selection_path, class: "col-md-auto d-flex justify-content-center align-items-center" do %>
           <%= image_tag "top_selections_content.jpg", alt: "組み合わせページへのリンク画像" %>
         <% end %>
-        <h6 class="d-md-none d-block pt-3 fw-bold text-center">料理シミュレーションへ</h6>
+        <div class="d-md-none d-block pt-3 text-center">
+          <h5 class="fw-bold">料理シミュレーションへ</h5>
+          <small class="fw-bold text-body-secondary">
+            自分だけの組み合わせを見つけて<br>いろんな料理を作ろう！！
+          </small>
+        </div>
         <div class="col-md d-md-block d-none px-lg-2 px-xl-5 py-3">
           <h3 class="text-center fw-bold">料理シミュレーション</h3>
           <div class="pt-3 lh-lg">
@@ -126,13 +131,23 @@
         <%= link_to ingredients_path, class: "col-md-auto d-flex justify-content-center align-items-center" do %>
           <%= image_tag "top_ingredients_content.jpg", alt: "食材一覧ページへのリンク画像" %>
         <% end %>
-        <h6 class="d-md-none d-block pt-3 fw-bold text-center">食材一覧へ</h6>
+        <div class="d-md-none d-block pt-3 text-center">
+          <h5 class="fw-bold">食材一覧へ</h5>
+          <small class="fw-bold text-body-secondary">
+            いろいろな食材の詳細が見れるよ！！
+          </small>
+        </div>
       </div>
       <div class="row px-lg-5 px-md-3 pb-3 mb-3 border-bottom">
         <%= link_to posts_path, class: "col-md-auto d-flex justify-content-center align-items-center" do %>
           <%= image_tag "top_posts_content.jpg", alt: "投稿一覧ページへのリンク画像" %>
         <% end %>
-        <h6 class="d-md-none d-block pt-3 fw-bold text-center">投稿一覧へ</h6>
+        <div class="d-md-none d-block pt-3 text-center">
+          <h6 class="fw-bold">投稿一覧へ</h6>
+          <small class="fw-bold text-body-secondary">
+            みんなの投稿が見れる！！<br>出来上がった料理を投稿してみよう！！
+          </small>
+        </div>
         <div class="col-md d-md-block d-none px-lg-2 px-xl-5 py-3">
           <h3 class="text-center fw-bold">投稿一覧</h3>
           <div class="pt-3 lh-lg">
