@@ -42,4 +42,4 @@
   > クラウドストレージには、**AWS S3**を使用
 + mysql 8.0.32
 
-[^1]: 株式会社任天堂が開発しているゼルダの伝説シリーズ最新作（2023年12月現在）。[公式サイト](https://www.nintendo.co.jp/zelda/totk/index.html/)
+[^1]: 株式会社任天堂が開発しているゼルダの伝説シリーズ最新作（2023年12月現在）。[公式サイト](https://www.nintendo.co.jp/zelda/totk/index.html)
