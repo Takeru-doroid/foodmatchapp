@@ -20,6 +20,10 @@
 
 - 得られた料理情報を共有できる投稿機能
 
+## データベース構造
+
+![Foodmatchapp_erd](https://github.com/Takeru-doroid/foodmatchapp/assets/108878703/c81bef6b-6ff5-4b09-951a-a927bb64ce9c)
+
 ## 遊び方
 
 1. 好きな食材を**選択**して、「**料理する**」ボタンを押す。
