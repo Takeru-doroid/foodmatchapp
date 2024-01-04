@@ -3,7 +3,9 @@
 ## アプリ概要
 
 ゼルダの伝説 ティアーズオブザキングダム<sup>[^1]</sup>というゲームに出てくる料理作りシステムを簡易的にシミュレーションすることができます。
-> <a href="https://foodmatchapp-9f8c45cddd1d.herokuapp.com" target="_blank" rel="noopener noreferrer">デプロイ済みリンク</a>
+
+### URL
+[https://foodmatchapp-9f8c45cddd1d.herokuapp.com](https://foodmatchapp-9f8c45cddd1d.herokuapp.com)
 
 ## 開発背景
 
@@ -49,4 +51,4 @@
   > クラウドストレージには、**AWS S3**を使用
 + mysql 8.0.32
 
-[^1]: 株式会社任天堂が開発しているゼルダの伝説シリーズ最新作（2023年12月現在）。<a href="https://www.nintendo.co.jp/zelda/totk/index.html" target="_blank" rel="noopener noreferrer">公式サイト</a>
+[^1]: 株式会社任天堂が開発しているゼルダの伝説シリーズ最新作（2023年12月現在）。 [公式サイト](https://www.nintendo.co.jp/zelda/totk/index.html)
