@@ -25,6 +25,7 @@
 ## データベース構造
 
 ![Foodmatchapp_erd](https://github.com/Takeru-doroid/foodmatchapp/assets/108878703/c81bef6b-6ff5-4b09-951a-a927bb64ce9c)
+> このER図は、GitMind<sup>[^2]</sup>を使用して作成しています。
 
 ## 遊び方
 
@@ -51,4 +52,5 @@
   > クラウドストレージには、**AWS S3**を使用
 + mysql 8.0.32
 
-[^1]: 株式会社任天堂が開発しているゼルダの伝説シリーズ最新作（2023年12月現在）。 [公式サイト](https://www.nintendo.co.jp/zelda/totk/index.html)
+[^1]: 2023年5月12日に任天堂より発売されたオープンアドベンチャーゲーム。 [公式サイト](https://www.nintendo.co.jp/zelda/totk/index.html)
+[^2]: AI（ChatGPT）搭載のマインドマップ作成ソフト。 [公式URL](https://gitmind.com/jp/)
