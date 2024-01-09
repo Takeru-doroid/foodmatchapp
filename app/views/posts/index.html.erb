@@ -1,68 +1,32 @@
 <div class="container posts-container p-4">
-  <% @posts.each_with_index do |post, i| %>
-    <div class="post-<%= i %> bg-ingredient border shadow-sm rounded p-3 mb-3" style="min-height: 194px;">
-      <div class="row">
-        <div class="col-sm-8">
-          <div class="row pb-3">
-            <div class="col-auto">
-              <% if post.user.avatar.attached? %>
-                <%= image_tag post.user.avatar.variant(resize_to_limit: [40, 40]), class: "rounded-circle", alt: "#{post.user.name}のアバター画像" if post.user.avatar.attached? %>
-              <% else %>
-                <%= image_tag "default_image_user.jpg", size: "40x40", class: "rounded-circle", alt: "デフォルトのアバター画像" %>
-              <% end %>
-            </div>
-            <div class="col row-cols-1">
-              <div class="col">
-                <%= post.user.name %>
-              </div>
-              <sub class="col text-body-secondary">
-                <%= post.created_at.to_formatted_s(:datetime_jp) %>
-              </sub>
-            </div>
-          </div>
-          <h5 class="fw-bold">
-            <%= post.title %>
-          </h5>
-          <%= post.body %>
-        </div>
-        <div class="col-sm-4">
-          <div class="border rounded py-1 post-dish">
-            <% if post.dish.image.attached? %>
-              <div class="d-flex justify-content-center pb-2">
-                <%= image_tag post.dish.image.variant(resize_to_limit: [160, 96]), alt: "#{post.dish.name}の画像" if post.dish.image.present? %>
-              </div>
-            <% end %>
-            <small class="d-flex justify-content-center">
-              <%= post.dish.name %>
-            </small>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-auto py-2">
-          <% if post.favorited_by?(current_user) %>
-            <%= link_to post_favorites_path(post.id), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
-              <i class="fa-solid fa-heart" style="color: rgb(232, 36, 88);"></i>
-              <%= post.favorites.count %>いいね
-            <% end %>
-          <% else %>
-            <%= link_to post_favorites_path(post.id), data: { turbo_method: :post }, class: "text-decoration-none" do %>
-              <i class="fa-regular fa-heart" style="color: rgb(232, 36, 88);"></i>
-              <%= post.favorites.count %>いいね
-            <% end %>
-          <% end %>
-        </div>
-        <div class="col py-2 text-end">
-          <% if current_user.id == post.user.id %>
-            <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish_id), class: "edit-icon" %>
-          <% end %>
-        </div>
-      </div>
+  <ul class="nav nav-tabs" id="myTab">
+    <li class="nav-item">
+      <button class="nav-link active" id="createdTab" data-bs-toggle="tab" data-bs-target="#createdTabPane" type="button">
+        投稿一覧
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" id="favoritesTab" data-bs-toggle="tab" data-bs-target="#favoritesTabPane" type="button">
+        高評価順
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content pt-2" id="myTabContent">
+    <div class="tab-pane fade show active" id="createdTabPane" tabindex="0">
+      <% @posts.each_with_index do |post, i| %>
+        <%= render "all_posts", post: post, i: i %>
+      <% end %>
     </div>
-  <% end %>
-  <div class="back-top-btn">
-    <%= link_to "#" do %>
-      <i class="fa-solid fa-circle-up fa-2xl" style="color: rgb(55, 36, 220);"></i>
+    <div class="tab-pane fade" id="favoritesTabPane" tabindex="0">
+      <% @favorite_posts.each_with_index do |post, i| %>
+        <%= render "all_posts", post: post, i: i %>
+      <% end %>
+    </div>
+  </div>
+  <div class="back-top-btn d-lg-none d-block text-center">
+    <%= link_to "#", class: "d-flex flex-column text-decoration-none", style: "color: white;" do %>
+      <div class="fa-solid fa-angles-up fa-2xl pb-2"></div>
+      <span>page top</span>
     <% end %>
   </div>
 </div>

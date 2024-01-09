@@ -1,13 +1,167 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
-<% if user_signed_in? %>
-  <p><%= link_to "selectionsコントローラー(食材選び)", selections_display_selection_path %></p>
-  <p><%= link_to "食材一覧", ingredients_path %></p>
-  <p><%= link_to "投稿一覧", posts_path %></p>
-<% end %>
-<% if user_signed_in? && current_user.admin? %>
-  <p><%= link_to "カテゴリ作成", new_category_path %></p>
-  <p><%= link_to "食材作成", new_ingredient_path %></p>
-  <p><%= link_to "料理作成", new_dish_path %></p>
-  <p><%= link_to "料理-カテゴリ紐付け", new_category_dish_path %></p>
-<% end %>
+<div class="container py-3">
+  <div class="rectangles p-3 mx-lg-5 my-lg-3 mx-1 my-2">
+    <h1 class="fw-bold text-center">ゼルダ料理 組み合わせシミュレーター</h1>
+    <div class="d-md-none d-block">
+      ゼルダの伝説シリーズに出てくる料理をつくるシミュレーター
+    </div>
+    <% if user_signed_in? && current_user.admin? %>
+      <div class="p-3 my-3 border-top border-bottom top-admin-container">
+        <h3 class="fw-bold">管理者権限を持っています。</h3>
+        <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1">
+          <div class="col">
+            <%= link_to new_category_path, class: "mx-lg-1 bg-warning-subtle" do %>
+              <div class="list-link">カテゴリ作成</div>
+            <% end %>
+          </div>
+          <div class="col">
+            <%= link_to new_ingredient_path, class: "mx-lg-1 bg-danger-subtle" do %>
+              <div class="list-link">食材作成</div>
+            <% end %>
+          </div>
+          <div class="col">
+            <%= link_to new_dish_path, class: "mx-lg-1 bg-info-subtle" do %>
+              <div class="list-link">料理作成</div>
+            <% end %>
+          </div>
+          <div class="col">
+            <%= link_to new_category_dish_path, class: "mx-lg-1 bg-success-subtle" do %>
+              <div class="list-link">料理-カテゴリ紐付け</div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="carousel slide carousel-fade my-3 mx-md-auto" id="carouselTopAutoPlaying" data-bs-ride="carousel" style="max-width: 950px;">
+      <div class="carousel-inner p-md-3">
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center align-items-center w-100">
+            <%= image_tag "zelda_official_img.jpeg", size: "754x400", class: "img-fluid", alt: "料理シミュレーターの紹介画像一つ目" %>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center align-items-center w-100">
+            <%= image_tag "top_carousel_img_1.jpg", size: "754x400", class: "img-fluid", alt: "料理シミュレーターの紹介画像二つ目" %>
+            <div class="carousel-caption d-none d-md-block">
+              <h3 class="fw-bold">組み合わせる</h3>
+              <p>お気に入りの組み合わせや食べてみたい料理になるように、<br>工夫をして組み合わせてみよう！！</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center align-items-center w-100">
+            <%= image_tag "top_carousel_img_2.jpg", size: "754x400", class: "img-fluid", alt: "料理シミュレーターの紹介画像三つ目" %>
+            <div class="carousel-caption d-none d-md-block">
+              <h3 class="fw-bold">料理をつくる</h3>
+              <p>選んだ食材で料理を作ろう！<br>どんな料理か実際に確かめてみよう！！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselTopAutoPlaying" data-bs-slide="prev">
+        <i class="fa-solid fa-chevron-left fa-xl" style="color: black;"></i>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselTopAutoPlaying" data-bs-slide="next">
+        <i class="fa-solid fa-chevron-right fa-xl" style="color: black;"></i>
+      </button>
+    </div>
+    <% unless user_signed_in? %>
+      <div class="row row-cols-2 row-cols-sm-none d-flex justify-content-center py-4 mx-lg-5 my-3 border-top border-bottom">
+        <div class="col-md mx-lg-3 my-lg-0 my-2">
+          <%= link_to new_user_session_path, class: "nav-link" do %>
+            <div class="bg-success-subtle rounded p-2" id="stretched-link">
+                <div class="d-flex justify-content-center" id="stretched-link-content">
+                  <i class="fa-solid fa-right-to-bracket fa-lg d-flex justify-content-center align-items-center me-2"></i>
+                  <div>ログイン</div>
+                </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md mx-lg-3 my-lg-0 my-2">
+          <%= link_to new_user_registration_path, class: "nav-link" do %>
+            <div class="bg-body-secondary rounded p-2" id="stretched-link">
+              <div class="d-flex justify-content-center" id="stretched-link-content">
+                <i class="fa-solid fa-user-plus fa-lg d-flex justify-content-center align-items-center me-2"></i>
+                <div>新規登録</div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md col-auto mx-lg-3 my-lg-0 my-2">
+          <%= link_to users_guest_sign_in_path, data: { turbo_method: :post}, class: "nav-link" do %>
+            <div class="bg-info-subtle rounded p-2" id="stretched-link">
+              <div class="d-flex justify-content-center" id="stretched-link-content">
+                <i class="fa-solid fa-user-secret fa-lg d-flex justify-content-center align-items-center me-3"></i>
+                <div>ゲストログイン</div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="top-selections-container p-lg-5 p-md-2 p-1">
+      <div class="row px-lg-5 px-md-3 pb-3 mb-3 border-bottom">
+        <%= link_to selections_display_selection_path, class: "col-md-auto d-flex justify-content-center align-items-center" do %>
+          <%= image_tag "top_selections_content.jpg", alt: "組み合わせページへのリンク画像" %>
+        <% end %>
+        <div class="d-md-none d-block pt-3 text-center">
+          <h5 class="fw-bold">料理シミュレーションへ</h5>
+          <small class="fw-bold text-body-secondary">
+            自分だけの組み合わせを見つけて<br>いろんな料理を作ろう！！
+          </small>
+        </div>
+        <div class="col-md d-md-block d-none px-lg-2 px-xl-5 py-3">
+          <h3 class="text-center fw-bold">料理シミュレーション</h3>
+          <div class="pt-3 lh-lg">
+            いろんな食材を組み合わせて、料理を作るシミュレーションができる。
+            また出てくる食材・料理は、実際にゼルダシリーズで出てくるもの！！
+            食材をクリックすると、詳細情報が見れるよ！組み合わせによっては、特殊効果が付くかも？
+            <small>（ゼルダの伝説 ティアーズオブザキングダムに基づく内容です）</small>
+          </div>
+        </div>
+      </div>
+      <div class="row px-lg-5 px-md-3 pb-3 mb-3 border-bottom">
+        <div class="col-md d-md-block d-none px-lg-2 px-xl-5 py-3">
+          <h3 class="text-center fw-bold">食材一覧</h3>
+          <div class="pt-3 lh-lg">
+            一覧で食材を見ることができる！！
+            また詳細情報から、料理した時に付与される効果も確認できる！！
+            料理に使いたい食材をあらかじめ確認してみたりしよう！！
+          </div>
+        </div>
+        <%= link_to ingredients_path, class: "col-md-auto d-flex justify-content-center align-items-center" do %>
+          <%= image_tag "top_ingredients_content.jpg", alt: "食材一覧ページへのリンク画像" %>
+        <% end %>
+        <div class="d-md-none d-block pt-3 text-center">
+          <h5 class="fw-bold">食材一覧へ</h5>
+          <small class="fw-bold text-body-secondary">
+            いろいろな食材の詳細が見れるよ！！
+          </small>
+        </div>
+      </div>
+      <div class="row px-lg-5 px-md-3 pb-3 mb-3 border-bottom">
+        <%= link_to posts_path, class: "col-md-auto d-flex justify-content-center align-items-center" do %>
+          <%= image_tag "top_posts_content.jpg", alt: "投稿一覧ページへのリンク画像" %>
+        <% end %>
+        <div class="d-md-none d-block pt-3 text-center">
+          <h6 class="fw-bold">投稿一覧へ</h6>
+          <small class="fw-bold text-body-secondary">
+            みんなの投稿が見れる！！<br>出来上がった料理を投稿してみよう！！
+          </small>
+        </div>
+        <div class="col-md d-md-block d-none px-lg-2 px-xl-5 py-3">
+          <h3 class="text-center fw-bold">投稿一覧</h3>
+          <div class="pt-3 lh-lg">
+            いろいろなユーザーの料理投稿が一覧で確認できる！！
+            投稿にいいねを押して、好みの投稿を見つけよう！！
+            レシピを載せて投稿したり、投稿を参考にした料理を作ってみたりしよう！！
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-end">
+      <small class="text-body-secondary">
+        ゼルダの伝説 ティアーズオブザキングダムに基づいています。
+      </small>
+    </div>
+  </div>
+</div>

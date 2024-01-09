@@ -1,5 +1,5 @@
-<div class="text-center">
-  <div class="form-edit border rounded">
+<div class="text-center py-3">
+  <div class="form-edit rectangles border rounded">
     <h2 class="h3 mb-5 fe-normal">ユーザー編集</h2>
     <%= form_with model: @user, url: user_registration_path, method: :put, id: "edit_user", class: "edit_user", local: true do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>

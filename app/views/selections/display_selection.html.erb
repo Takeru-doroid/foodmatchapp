@@ -16,8 +16,8 @@
           <% end %>
         </select>
         <div class="d-flex d-lg-none">
-          <button type="button" class="btn bg-displaydish m-1" data-bs-toggle="collapse" data-bs-target="#collapsehowtoplay" aria-expanded="false" aria-controls="collapsehowtoplay">
-            <i class="fa-solid fa-lightbulb fa-xl"></i>
+          <button type="button" class="btn m-1" data-bs-toggle="collapse" data-bs-target="#collapsehowtoplay" aria-expanded="false" aria-controls="collapsehowtoplay">
+            <i class="fa-solid fa-lightbulb fa-2xl" style="color: darkorange;"></i>
           </button>
         </div>
       </div>
@@ -26,7 +26,7 @@
           <p class="py-1 fw-bold">遊び方</p>
           <ol>
             <li class="py-1">好きな食材を"選択"する</li>
-            <li class="py-1">料理する"を押して、料理をつくる</li>
+            <li class="py-1">"料理する"を押して、料理をつくる</li>
             <li class="py-1">できた料理を"投稿"してみんなと共有しよう！</li>
           </ol>
           <p class="pt-3 text-danger">
@@ -89,4 +89,10 @@
       <% end %>
     </div>
   <% end %>
+  <div class="back-top-btn d-md-none d-block text-center">
+    <%= link_to "#", class: "d-flex flex-column text-decoration-none", style: "color: white;" do %>
+      <div class="fa-solid fa-angles-up fa-2xl pb-2"></div>
+      <span>page top</span>
+    <% end %>
+  </div>
 </div>

@@ -17,6 +17,8 @@ module SelectionsHelper
               map(&:first)
             Dish.find_by(id: display_dish)
           end
+        elsif select_ingredients.pluck(:name).include?("ヨロイカボチャ") && all_category_ids.include?(2)
+          Dish.find_by(name: "肉詰めカボチャ")
         else
           pluck_dish_id = CategoryDish.where(category_id: duplicate_categories).pluck(:dish_id)
           display_dish = CategoryDish.where(dish_id: pluck_dish_id).
@@ -26,7 +28,9 @@ module SelectionsHelper
           Dish.find_by(id: display_dish)
         end
       else
-        if select_ingredients.pluck(:name).include?("上ケモノ肉") && all_category_ids.include?(3)
+        if select_ingredients.pluck(:name).include?("ヨロイカボチャ") && all_category_ids.include?(2)
+          Dish.find_by(name: "肉詰めカボチャ")
+        elsif select_ingredients.pluck(:name).include?("上ケモノ肉") && all_category_ids.include?(3)
           Dish.find_by(name: "上山海焼き")
         elsif all_category_ids.include?(2) && all_category_ids.include?(3)
           Dish.find_by(name: "山海焼き")
