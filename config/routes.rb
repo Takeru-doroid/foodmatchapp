@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root "homes#top"
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
+  devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
+  resources :users, only: [:show]
+  resources :categories, only: [:new, :create]
+  resources :ingredients, only: [:index, :show, :new, :create]
+  resources :dishes, only: [:new, :create]
+  resources :category_dishes, only: [:new, :create]
+  resources :posts, only: [:index, :new, :create, :edit, :update, :destroy] do
+    resource :favorites, only: [:create, :destroy]
+  end
+  get 'selections/display_selection', to: 'selections#display_selection'
+  post 'selections/calculate_dishes', to: 'selections#calculate_dishes'
 end

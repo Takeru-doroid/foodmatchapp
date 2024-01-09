@@ -1,0 +1,42 @@
+<div class="container py-4">
+  <div class="row g-3">
+    <% @category_ingredients.each do |category| %>
+      <% category.ingredients.each do |ingredient| %>
+        <div class="col-xxl-3 col-xl-4 col-lg-6 col-12">
+          <%= link_to ingredient_path(ingredient.id), class: "link-of-ingredient" do %>
+            <div class="bg-ingredient border rounded p-2">
+              <div class="row">
+                <div class="col-auto">
+                  <% if ingredient.image.attached? %>
+                    <%= image_tag ingredient.image.variant(resize_to_limit: [60, 60]), alt: "#{ingredient.name}の画像" if ingredient.image.present? %>
+                  <% end %>
+                </div>
+                <div class="col d-flex flex-column">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex text-body-secondary">
+                      <h6><%= ingredient.name %></h6>
+                    </div>
+                    <div class="text-body-secondary">
+                      <%= ingredient.category.name %>
+                    </div>
+                  </div>
+                  <% if ingredient.cooking_effect.present? %>
+                    <div class="text-body-secondary cooking-effect-icon">
+                      <%= ingredient.cooking_effect %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="back-top-btn d-lg-none d-block text-center">
+    <%= link_to "#", class: "d-flex flex-column text-decoration-none", style: "color: white;" do %>
+      <div class="fa-solid fa-angles-up fa-2xl pb-2"></div>
+      <span>page top</span>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<%= form_with model: model, local: true do |f| %>
+  <% if defined? model.name %>
+    <div class="form-floating my-3">
+      <%= f.text_field :name, class: "form-control", autofocus: true %>
+      <%= f.label :name %>
+    </div>
+  <% end %>
+
+  <% if defined? model.flavor_text %>
+    <div class="form-floating my-3">
+      <%= f.text_area :flavor_text, class: "form-control", style: "height: 150px", autofocus: true %>
+      <%= f.label :flavor_text %>
+    </div>
+  <% end %>
+
+  <% if defined? model.cooking_effect %>
+    <div class="form-floating my-3">
+      <%= f.text_field :cooking_effect, class: "form-control", autofocus: true %>
+      <%= f.label :cooking_effect %>
+    </div>
+  <% end %>
+
+  <% if defined? model.category_id %>
+    <div class="my-3">
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "紐付けるカテゴリを選ぶ"}, {class: "form-select"}) %>
+    </div>
+  <% end %>
+
+  <% if defined? model.dish_id %>
+    <div class="my-3">
+      <%= f.collection_select(:dish_id, Dish.all, :id, :name, {include_blank: "紐付ける料理を選ぶ"}, {class: "form-select"}) %>
+    </div>
+  <% end %>
+
+  <% if defined? model.image %>
+    <div class="my-3">
+      <%= f.label :image %>
+      <%= f.file_field :image, class: "form-control" %>
+    </div>
+  <% end %>
+
+  <%= f.submit "作成する", class: "btn btn-outline-success w-100 my-4" %>
+<% end %>

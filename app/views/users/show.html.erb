@@ -1,0 +1,87 @@
+<div class="container py-3">
+
+  <div class="row">
+
+    <div class="rectangles col rounded" style="max-height: 300px;">
+      <div class="p-3">
+        <div class="text-center pb-3">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar.variant(resize_to_limit: [80, 80]), class: "rounded-circle", alt: "ユーザーのアバター画像" if current_user.avatar.present? %>
+          <% else %>
+            <%= image_tag "default_image_user.jpg", size: "80x80", class: "rounded-circle", alt: "デフォルトのアバター画像" %>
+          <% end %>
+        </div>
+        <h4 class="pb-2">
+          <%= current_user.name %>
+        </h4>
+        <hr>
+        <div class="pb-2">
+          投稿数：<%= current_user.posts.count %>
+        </div>
+        <div class="pb-2">
+          いいね数：
+          <%= @post_favorites_count %>
+        </div>
+        <div class="pb-2">
+          <%= link_to "ユーザー情報変更", edit_user_registration_path, class: "edit-icon" %>
+        </div>
+      </div>  
+    </div>
+
+    <div class="my-posts-container col-6">
+      <h4>これまでの投稿</h4>
+      <% if current_user.posts.present? %>
+        <% @posts.each_with_index do |post, i| %>
+          <div class="bg-ingredient border shadow-sm rounded p-3 mb-3 my-post-<%= i %>" style="min-height: 194px;">
+            <div class="row">
+              <div class="col-sm-8">
+                <sub class="text-body-secondary">
+                  <%= post.created_at.to_formatted_s(:datetime_jp) %>
+                </sub>
+                <h5 class="fw-bold">
+                  <%= post.title %>
+                </h5>
+                <%= post.body %>
+              </div>
+              <div class="col-sm-4">
+                <div class="border rounded py-1 post-dish">
+                  <% if  post.dish.image.attached? %>
+                    <div class="d-flex justify-content-center pb-2">
+                      <%= image_tag post.dish.image.variant(resize_to_limit: [160, 96]), alt: "#{post.dish.name}の画像" if post.dish.image.present? %>
+                    </div>
+                  <% end %>
+                  <small class="d-flex justify-content-center">
+                    <%= post.dish.name %>
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-auto">
+                <% if post.favorited_by?(current_user) %>
+                  <%= link_to post_favorites_path(post.id), data: { turbo_method: :delete }, class: "text-decoration-none" do %>
+                    <i class="fa-solid fa-heart" style="color: rgb(232, 36, 88);"></i>
+                    <%= post.favorites.count %>いいね
+                  <% end %>
+                <% else %>
+                  <%= link_to post_favorites_path(post.id), data: { turbo_method: :post }, class: "text-decoration-none" do %>
+                    <i class="fa-regular fa-heart" style="color: rgb(232, 36, 88);"></i>
+                    <%= post.favorites.count %>いいね
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="col py-2 text-end">
+                <%= link_to "編集する", edit_post_path(post.id, dish_id: post.dish.id), class: "edit-icon" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div>投稿はありません</div>
+      <% end %>
+    </div>
+
+    <div class="col"></div>
+
+  </div>
+</div>

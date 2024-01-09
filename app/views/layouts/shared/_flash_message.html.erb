@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-center">
+  <% if flash[:notice].present? %>
+    <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" id="flash-message">
+      <span class="fa-solid fa-circle-check pe-2"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <%= notice %>
+    </div>
+  <% end %>
+  <% if flash[:alert].present? %>
+    <div class="alert alert-warning d-flex align-items-center alert-dismissible fade show" id="flash-message">
+      <span class="fa-solid fa-triangle-exclamation pe-2"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <%= alert %>
+    </div>
+  <% end %>
+</div>

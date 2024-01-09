@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-md rectangles">
+  <div class="container py-1 px-4">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <i class="fa-solid fa-house fa-xl"></i>
+    <% end %>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLoginUserContent" aria-controls="navbarLoginUserContent" aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarLoginUserContent">
+      <div class="ms-auto row d-flex justify-content-center">
+        <div class="nav-item col-auto pe-sm-3 my-2 my-sm-none">
+          <%= link_to posts_path, class: "nav-link" do %>
+            <i class="fa-solid fa-comments fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">投稿一覧</div>
+          <% end %>
+        </div>
+        <div class="nav-item col-auto pe-sm-3 my-2 my-sm-none">
+          <%= link_to selections_display_selection_path, class: "nav-link" do %>
+            <i class="fa-solid fa-utensils fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">組み合わせ</div>
+          <% end %>
+        </div>
+        <div class="nav-item col-auto pe-sm-3 my-2 my-sm-none">
+          <%= link_to ingredients_path, class: "nav-link" do %>
+            <i class="fa-solid fa-carrot fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">食材一覧</div>
+          <% end %>
+        </div>
+        <div class="nav-item col-auto pe-sm-3 my-2 my-sm-none">
+          <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" do %>
+            <i class="fa-solid fa-right-from-bracket fa-2xl pt-3 d-flex justify-content-center"></i>
+            <div class="d-flex justify-content-center pt-3">ログアウト</div>
+          <% end %>
+        </div>
+        <div class="nav-item col-auto pe-sm-3 my-2 my-sm-none">
+          <%= link_to user_path(current_user), class: "nav-link d-flex justify-content-center" do %>
+            <% if current_user.avatar.attached? %>
+              <%= image_tag current_user.avatar.variant(resize_to_limit: [50, 50]), class: "rounded-circle", alt: "ユーザーのアバター画像" if current_user.avatar.present? %>
+            <% else %>
+              <%= image_tag "default_image_user.jpg", size: "50x50", class: "rounded-circle", alt: "デフォルトのアバター画像" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

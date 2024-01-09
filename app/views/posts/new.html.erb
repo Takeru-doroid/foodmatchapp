@@ -1,0 +1,21 @@
+<div class="container py-4">
+  <div class="form-edit">
+    <%= render "layouts/shared/error_messages", model: @post %>
+    <div class="bg-displaydish rounded p-3">
+      <%= form_with model: @post, local: true do |f| %>
+        <%= f.hidden_field :dish_id, value: @post.dish_id %>
+        <div class="pb-4">
+          <%= f.label :title, class: "form-label fw-bold" %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="pb-4">
+          <%= f.label :body, class: "form-label fw-bold" %>
+          <%= f.text_area :body, class: "form-control", rows: 3 %>
+        </div>
+        <div class="pb-3">
+          <%= f.submit "投稿する" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

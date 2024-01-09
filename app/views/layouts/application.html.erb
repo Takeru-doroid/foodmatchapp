@@ -6,11 +6,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/ffc69ba219.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <% if user_signed_in? %>
+        <%= render "layouts/shared/login_user_header" %>
+      <% else %>
+        <%= render "layouts/shared/no_login_user_header" %>
+      <% end %>
+      <%= render "layouts/shared/flash_message" %>
+    </header>
+    <div class="background-container" style="min-height: 800px;">
+      <%= yield %>
+    </div>
+    <footer>
+      <%= render "layouts/shared/footer" %>
+    </footer>
   </body>
 </html>

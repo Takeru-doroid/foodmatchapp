@@ -1,0 +1,10 @@
+<% if model.errors.any? %>
+  <div class="alert alert-danger alert-dismissible fade show" id="error_explanation">
+    <% model.errors.full_messages.each do |message| %>
+      <div>
+        <strong><%= message %></strong>
+      </div>
+    <% end %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+<% end %>

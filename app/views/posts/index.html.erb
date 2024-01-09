@@ -1,0 +1,32 @@
+<div class="container posts-container p-4">
+  <ul class="nav nav-tabs" id="myTab">
+    <li class="nav-item">
+      <button class="nav-link active" id="createdTab" data-bs-toggle="tab" data-bs-target="#createdTabPane" type="button">
+        投稿一覧
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" id="favoritesTab" data-bs-toggle="tab" data-bs-target="#favoritesTabPane" type="button">
+        高評価順
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content pt-2" id="myTabContent">
+    <div class="tab-pane fade show active" id="createdTabPane" tabindex="0">
+      <% @posts.each_with_index do |post, i| %>
+        <%= render "all_posts", post: post, i: i %>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="favoritesTabPane" tabindex="0">
+      <% @favorite_posts.each_with_index do |post, i| %>
+        <%= render "all_posts", post: post, i: i %>
+      <% end %>
+    </div>
+  </div>
+  <div class="back-top-btn d-lg-none d-block text-center">
+    <%= link_to "#", class: "d-flex flex-column text-decoration-none", style: "color: white;" do %>
+      <div class="fa-solid fa-angles-up fa-2xl pb-2"></div>
+      <span>page top</span>
+    <% end %>
+  </div>
+</div>

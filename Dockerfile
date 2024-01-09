@@ -1,5 +1,6 @@
 FROM ruby:3.1
 
+RUN apt-get update && apt-get install -y libvips42
 RUN mkdir /foodmatchapp
 WORKDIR /foodmatchapp
 COPY Gemfile /foodmatchapp/Gemfile
