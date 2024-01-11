@@ -50,6 +50,9 @@
   }
 
   @media (max-width: 425px) {
+    #myTab .nav-link {
+      font-size: 0.8rem;
+    }
     .footer-contents {
       font-size: 0.65rem;
     }
