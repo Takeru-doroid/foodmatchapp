@@ -58,6 +58,21 @@ RSpec.describe Post, type: :system do
         end
       end
 
+      it "お気に入りタブには、いいねされている投稿のみが表示されていること" do
+        within ".post-0" do
+          click_on "いいね"
+        end
+        within "#myLikePostsTabPane" do
+          expect(page).to have_css ".post-0"
+        end
+      end
+
+      it "どの投稿にもいいねをしていなければ、お気に入りタブに何も表示されていないこと" do
+        within "#myLikePostsTabPane" do
+          expect(page).to have_content "お気に入りの投稿はありません"
+        end
+      end
+
       it "自分の投稿に、編集ページへのリンクがあること" do
         within ".posts-container" do
           within ".post-0" do
