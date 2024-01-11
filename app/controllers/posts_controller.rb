@@ -3,6 +3,8 @@ class PostsController < ApplicationController
     @posts = Post.includes(:user, :favorites, dish: { image_attachment: :blob }).order(created_at: "desc")
     @favorite_posts = Post.includes(:user, :favorites, dish: { image_attachment: :blob }).
       find(Favorite.group(:post_id).order("count(post_id) desc").pluck(:post_id))
+    @my_like_posts = Post.includes(:user, :favorites, dish: { image_attachment: :blob }).
+      where(favorites: { user_id: current_user }).order(created_at: "desc")
   end
 
   def new

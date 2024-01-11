@@ -10,6 +10,11 @@
         高評価順
       </button>
     </li>
+    <li class="nav-item">
+      <button class="nav-link" id="myLikePostsTab" data-bs-toggle="tab" data-bs-target="#myLikePostsTabPane" type="button">
+        お気に入り
+      </button>
+    </li>
   </ul>
   <div class="tab-content pt-2" id="myTabContent">
     <div class="tab-pane fade show active" id="createdTabPane" tabindex="0">
@@ -20,6 +25,15 @@
     <div class="tab-pane fade" id="favoritesTabPane" tabindex="0">
       <% @favorite_posts.each_with_index do |post, i| %>
         <%= render "all_posts", post: post, i: i %>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="myLikePostsTabPane" tabindex="0">
+      <% if @my_like_posts.present? %>
+        <% @my_like_posts.each_with_index do |post, i| %>
+          <%= render "all_posts", post: post, i: i %>
+        <% end %>
+      <% else %>
+        <div>お気に入りの投稿はありません</div>
       <% end %>
     </div>
   </div>
