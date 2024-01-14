@@ -111,7 +111,7 @@
 
   .cooking-effect-icon:before {
     font-family: "Font Awesome 5 Free";
-    content: "\f005";
+    content: "\e2ca";
     font-weight: 900;
   }
 
@@ -284,4 +284,18 @@
     --bs-nav-tabs-border-color: var(--bg-beige);
     --bs-nav-tabs-link-hover-border-color: var(--bg-beige);
     --bs-nav-tabs-link-active-bg: var(--bg-beige);
+  }
+
+  #introduction-cooking-recipe #other-ingredient-img img {
+    transition-duration: 0.3s;
+  }
+
+  #introduction-cooking-recipe #other-ingredient-img:hover {
+    img {
+      transform: scale(1.1);
+    }
+  }
+
+  .custom-tooltip {
+    --bs-tooltip-font-size: 0.8rem;
   }
