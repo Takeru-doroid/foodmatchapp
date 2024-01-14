@@ -21,6 +21,44 @@
         <div class="card-text px-md-5 py-1"><%= @ingredient.flavor_text %></div>
       </div>
     </div>
+    <% if @recipe_ingredient.present? %>
+      <hr>
+      <div class="row d-flex justify-content-center align-items-center pb-4" id="introduction-cooking-recipe">
+        <h6 class="text-center pb-3">料理レシピ紹介</h6>
+        <div class="col-sm-auto text-center">
+          <% if @ingredient.image.attached? %>
+            <%= image_tag @ingredient.image.variant(resize_to_limit: [60, 60]), class: "rounded", alt: "料理レシピの#{@ingredient.name}の画像" if @ingredient.image.present? %>
+          <% else %>
+            <%= image_tag "test_sample.jpg", size: "60x60", class: "rounded-circle", alt: "料理レシピの食材サンプル画像" %>
+          <% end %>
+          <div><%= @ingredient.name %></div>
+        </div>
+        <h3 class="col-sm-auto text-center">+</h3>
+        <%= link_to ingredient_path(@recipe_ingredient.id), class: "text-decoration-none col-sm-auto text-center", id: "other-ingredient-img", "data-bs-toggle" => "tooltip", "data-bs-title" => "#{@recipe_ingredient.name}を詳しく見る", "data-bs-custom-class" => "custom-tooltip" do %>
+          <% if @recipe_ingredient.image.attached? %>
+            <%= image_tag @recipe_ingredient.image.variant(resize_to_limit: [60, 60]), class: "rounded", alt: "料理レシピの#{@recipe_ingredient.name}の画像" if @recipe_ingredient.image.present? %>
+          <% else %>
+            <%= image_tag "test_sample.jpg", size: "60x60", class: "rounded-circle", alt: "料理レシピの食材サンプル画像" %>
+          <% end %>
+          <div style="color: black;"><%= @recipe_ingredient.name %></div>
+        <% end %>
+        <h3 class="col-lg-auto text-center px-3">
+          <span class="d-lg-inline-block d-none">→</span>
+          <span class="d-lg-none d-block py-3">↓</span>
+        </h3>
+        <div class="col-lg-auto text-center">
+          <% if @recipe_dish.image.attached? %>
+            <%= image_tag @recipe_dish.image.variant(resize_to_limit: [80, 80]), class: "rounded", alt: "料理レシピの#{@recipe_dish.name}の画像" if @recipe_dish.image.present? %>
+          <% else %>
+            <%= image_tag "test_sample.jpg", size: "80x80", class: "rounded-circle", alt: "料理レシピの料理サンプル画像" %>
+          <% end %>
+          <div><%= @recipe_dish.name %></div>
+          <% if (@ingredient.cooking_effect.present? ^ @recipe_ingredient.cooking_effect.present?) || (@ingredient.cooking_effect.present? && @ingredient.cooking_effect == @recipe_ingredient.cooking_effect) %>
+            <small class="cooking-effect-icon" style="color: darkorange;">特殊な効果がつくよ！！</small>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <p>
       <%= link_to :back, class: "link-with-icon" do %>
         戻る<i class="fa-solid fa-chevron-right"></i>
