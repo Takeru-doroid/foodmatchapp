@@ -1,0 +1,19 @@
+<% visiter = notification.visiter %>
+<% post = notification.post %>
+
+<div class="p-sm-3 p-1 mx-sm-2 my-3 border rounded">
+  <div class="row">
+    <div class="col-sm-none col-auto">
+      <% if visiter.avatar.attached? %>
+        <%= image_tag visiter.avatar.variant(resize_to_limit: [60, 60]), class: "rounded-circle", alt: "#{visiter.name}のアバター画像" if visiter.avatar.attached? %>
+      <% else %>
+        <%= image_tag "default_image_user.jpg", size: "60x60", class: "rounded-circle", alt: "デフォルトのアバター画像" %>
+      <% end %>
+    </div>
+    <small class="col d-sm-none d-flex justify-content-end text-body-secondary"><%= "(#{time_ago_in_words(notification.created_at)}前)" %></small>
+    <span class="col-sm col-none notification-text d-sm-inline-block d-block py-2">
+      <%= notification_form(notification) %>
+    </span>
+    <small class="col-sm-auto d-sm-block d-none text-end text-body-secondary"><%= "(#{time_ago_in_words(notification.created_at)}前)" %></small>
+  </div>
+</div>

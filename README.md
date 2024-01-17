@@ -22,7 +22,10 @@
   - 食材や料理の詳細情報は画像クリックでモーダル表示
   - 選択した食材は詳細ページへのリンク
 - 料理に関する投稿(CRUD)機能
+  - 管理者権限を持つユーザーのみ作成することが可能
+- 料理詳細ページには料理レシピを一つ掲載
 - 投稿へのいいね機能
+- いいね通知機能
 - 投稿種類の切り替えタブ機能
   - 最新の投稿順(降順)
   - いいね数が多い順
@@ -30,7 +33,7 @@
 
 ## データベース構造
 
-![Foodmatchapp_erd](https://github.com/Takeru-doroid/foodmatchapp/assets/108878703/c81bef6b-6ff5-4b09-951a-a927bb64ce9c)
+![foodmatchapp_erd](https://github.com/Takeru-doroid/foodmatchapp/assets/108878703/6bce15c7-4ac0-4bb7-b3c6-44000496dc7b)
 > このER図は、GitMind<sup>[^2]</sup>を使用して作成しています。
 
 ## 遊び方
