@@ -1,0 +1,19 @@
+<div class="container p-sm-4 px-1 py-4" style="max-width: 800px;">
+  <div class="p-3 bg-ingredient rounded">
+    <h3 class="text-center">通知</h3>
+    <div>
+      <%= link_to destroy_all_user_notifications_path, data: { turbo_method: :delete }, class: "d-inline-block p-2 border rounded text-decoration-none" do %>
+        <div class="delete-icon">削除する</div>
+      <% end %>
+      <% if @notifications.present? %>
+        <div class="py-3" id="notification-body">
+          <%= render @notifications %>
+        </div>
+      <% else %>
+        <div class="py-3">
+          通知はありません
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
