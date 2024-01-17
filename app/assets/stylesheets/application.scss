@@ -40,6 +40,11 @@
     .post-dish small {
       font-size: 0.75em;
     }
+
+    #notification-body img {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   @media (max-width: 480px) {
@@ -47,12 +52,21 @@
       max-width: 60px;
       max-height: 60px;
     }
+
+    .notification-text {
+      font-size: 0.8rem;
+    }
+
+    #notification-body small {
+      font-size: 0.8rem;
+    }
   }
 
   @media (max-width: 425px) {
     #myTab .nav-link {
       font-size: 0.8rem;
     }
+
     .footer-contents {
       font-size: 0.65rem;
     }
@@ -298,4 +312,11 @@
 
   .custom-tooltip {
     --bs-tooltip-font-size: 0.8rem;
+  }
+
+  .stack-circle {
+    position: absolute;
+    padding-left: 1.5rem;
+    padding-top: 0rem;
+    color: chartreuse;
   }
