@@ -33,7 +33,7 @@
 
 ## データベース構造
 
-![Foodmatchapp_erd](https://github.com/Takeru-doroid/foodmatchapp/assets/108878703/c81bef6b-6ff5-4b09-951a-a927bb64ce9c)
+![foodmatchapp_erd](https://github.com/Takeru-doroid/foodmatchapp/assets/108878703/6bce15c7-4ac0-4bb7-b3c6-44000496dc7b)
 > このER図は、GitMind<sup>[^2]</sup>を使用して作成しています。
 
 ## 遊び方
