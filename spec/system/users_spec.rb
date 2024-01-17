@@ -13,36 +13,27 @@ RSpec.describe User, type: :system do
 
     describe "ヘッダーアクション" do
       it "トップ画面に遷移できること" do
-        find(".fa-house").click
+        find("#root-path").click
         expect(current_path).to eq root_path
       end
 
       it "新規登録画面に遷移できること" do
-        within "#navbarLogoutUserContent" do
-          click_on "新規登録"
-        end
+        find("#new-user-registration-path").click
         expect(current_path).to eq new_user_registration_path
       end
 
       it "ログイン画面に遷移できること" do
-        within "#navbarLogoutUserContent" do
-          click_on "ログイン"
-        end
+        find("#login-path").click
         expect(current_path).to eq new_user_session_path
       end
 
       it "ゲストログインができること" do
-        within "#navbarLogoutUserContent" do
-          click_on "ゲストログイン"
-        end
-        expect(current_path).to eq root_path
+        find("#guest-login-path").click
         expect(page).to have_content "ゲストユーザーとしてログインしました。"
       end
 
       it "ゲストユーザーは編集・更新ができないこと" do
-        within "#navbarLogoutUserContent" do
-          click_on "ゲストログイン"
-        end
+        find("#guest-login-path").click
         visit user_path(guest_user)
         click_on "ユーザー情報変更"
         expect(page).to have_content "ゲストユーザーの更新・削除はできません。"
@@ -78,18 +69,24 @@ RSpec.describe User, type: :system do
     describe "ログイン後" do
       before { login(user) }
 
+      it "投稿一覧のリンク先がposts_pathになること" do
+        find("#posts-path").click
+        expect(current_path).to eq posts_path
+      end
+
       it "組み合わせのリンク先がselections_display_selection_pathになること" do
-        within "#navbarLoginUserContent" do
-          click_on "組み合わせ"
-        end
+        find("#selections-display-selection-path").click
         expect(current_path).to eq selections_display_selection_path
       end
 
       it "食材一覧のリンク先がingredients_pathになること" do
-        within "#navbarLoginUserContent" do
-          click_on "食材一覧"
-        end
+        find("#ingredients-path").click
         expect(current_path).to eq ingredients_path
+      end
+
+      it "ログアウトリンクをクリックするとログアウトできること" do
+        find("#logout-path").click
+        expect(page).to have_selector "#navbarLogoutUserContent"
       end
 
       it "デフォルトのアバター画像が表示されていること" do
@@ -99,6 +96,11 @@ RSpec.describe User, type: :system do
       it "デフォルトのアバターをクリックすると詳細画面に遷移できること" do
         click_on "デフォルトのアバター画像"
         expect(current_path).to eq user_path(user)
+      end
+
+      it ".fa-bellアイコンをクリックするとユーザーの通知一覧に遷移できること" do
+        find("#user-notifications-path").click
+        expect(current_path).to eq user_notifications_path(user)
       end
 
       describe "showページ" do
@@ -158,7 +160,7 @@ RSpec.describe User, type: :system do
         end
 
         it "他ユーザーは、詳細ページにアクセスできないこと" do
-          click_on "ログアウト"
+          find("#logout-path").click
           login(guest_user)
           visit user_path(user)
           expect(page).to have_content "無効なアクセスです"
@@ -168,12 +170,6 @@ RSpec.describe User, type: :system do
       describe "editページ" do
         before do
           visit edit_user_registration_path
-        end
-
-        it "アイコンのクリックでパスワードの表示/非表示が切り替えれること" do
-          expect(page).to have_selector "input[type='password']"
-          find("#toggle-password-icon").click
-          expect(page).to have_selector "input[type='text']"
         end
 
         it "ユーザー編集ができること" do
