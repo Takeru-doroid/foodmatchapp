@@ -55,23 +55,11 @@ RSpec.describe Ingredient, type: :system do
         expect(page).to have_selector "#introduction-cooking-recipe"
       end
 
-      it "料理レシピ内で片方の食材が詳細ページへのリンクとなっていること" do
+      it "料理レシピには「メイン食材のカテゴリ名」「サブ食材のカテゴリ名」「出来上がる料理名」が表示されていること" do
         within "#introduction-cooking-recipe" do
-          find("#other-ingredient-img").click
-          expect(current_path).to eq ingredient_path(other_ingredient)
-        end
-      end
-
-      it "効果が付かない組み合わせであれば料理レシピにメッセージは表示されないこと" do
-        within "#introduction-cooking-recipe" do
-          expect(page).to_not have_content "特殊な効果がつくよ！！"
-        end
-      end
-
-      it "効果が付く組み合わせであれば料理レシピにメッセージが表示されること" do
-        visit ingredient_path(effect_ingredient)
-        within "#introduction-cooking-recipe" do
-          expect(page).to have_content "特殊な効果がつくよ！！"
+          expect(page).to have_content "#{ingredient.category.name}"
+          expect(page).to have_content "#{other_ingredient.category.name}"
+          expect(page).to have_content "#{recipe_dish.name}"
         end
       end
     end
