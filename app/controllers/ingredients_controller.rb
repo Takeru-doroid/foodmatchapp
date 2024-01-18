@@ -9,7 +9,7 @@ class IngredientsController < ApplicationController
   def show
     @ingredient = Ingredient.find(params[:id])
     result_recipe = calculate_recipe(@ingredient)
-    @recipe_ingredient = result_recipe.values.first
+    @recipe_category = result_recipe.values.first
     @recipe_dish = result_recipe.keys.first
   end
 

@@ -13,8 +13,8 @@ module IngredientsHelper
     category_ids = Category.joins(:category_dishes).
       where(category_dishes: { dish_id: recipe_dish }).
       pluck(:category_id).select { |i| i != ingredient.category_id }
-    other_ingredient = Ingredient.where(category_id: category_ids).shuffle[0]
-    recipe_hash = { recipe_dish => other_ingredient }
+    other_category = Category.find_by(id: category_ids)
+    recipe_hash = { recipe_dish => other_category }
     recipe_hash
   end
 end
