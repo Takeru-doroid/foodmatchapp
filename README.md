@@ -5,7 +5,7 @@
 ゼルダの伝説 ティアーズオブザキングダム<sup>[^1]</sup>というゲームに出てくる料理作りシステムを簡易的にシミュレーションすることができます。
 
 ### URL
-[https://foodmatchapp-9f8c45cddd1d.herokuapp.com](https://foodmatchapp-9f8c45cddd1d.herokuapp.com)
+削除済み
 
 ## 開発背景
 
